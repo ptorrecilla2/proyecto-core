@@ -1,0 +1,23 @@
+.b-login {
+    background-image: url(../../assets/img/fondo-login-2.avif);
+    /*Hacemos que ocupe el 100% de la pantalla y que esté centrado*/
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+/*Oscuremos la imagen del fondo con sombras*/
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: multiply;
+
+}
+
+.bg {
+    background-image: url(../../assets/img/img-login.png);
+    background-position: center center;
+    background-size: cover;
+
+    
+   
+    
+}
