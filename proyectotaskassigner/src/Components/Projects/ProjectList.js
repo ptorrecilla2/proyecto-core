@@ -7,10 +7,11 @@ import { getAuthToken } from '../../Services/AuthService';
 
 
 const Projects = () => {
-       const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [projectsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1); // controla la página actual
+    const [projectsPerPage] = useState(5); // controla la cantidad de proyectos a mostrar por página
+    const [search, setSearch] = useState(""); // controla la barra de búsqueda
 
     useEffect(() => {
         const authToken = getAuthToken();
@@ -48,11 +49,31 @@ const Projects = () => {
         console.log(`Delete project with ID: ${id}`);
     };
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    //Barra de búsqueda
+    const handleSearch = (event) => { 
+        setSearch(event.target.value); // Actualizar el estado de búsqueda con el valor del input
+        filteredSearch(event.target.value); // Filtramos la búsqueda con el valor del input
+    }
 
-    const indexOfLastProject = Math.min(currentPage * projectsPerPage, projects.length);
-    const indexOfFirstProject = Math.min((currentPage - 1) * projectsPerPage, projects.length);
-    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+    //Función para buscar por nombre de proyecto o por nombre de cliente
+    const filteredSearch = (search) => {
+        axios.get('https://localhost:7153/api/Projects')
+        .then((response) => {
+            const filteredProjects = response.data.filter((project) => {
+                return project.name.toLowerCase().includes(search.toLowerCase()) || project.client.name.toLowerCase().includes(search.toLowerCase());
+            });
+            setProjects(filteredProjects);
+        })
+        .catch((error) => {
+            console.error('Error al obtener la información de los proyectos');
+        });
+    }
+    
+    // Paginación
+    const paginate = (pageNumber) => setCurrentPage(pageNumber); // Cambiar la página actual
+    const indexOfLastProject = Math.min(currentPage * projectsPerPage, projects.length); // Índice del último proyecto en la página actual
+    const indexOfFirstProject = Math.min((currentPage - 1) * projectsPerPage, projects.length); // Índice del primer proyecto en la página actual
+    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject); // Proyectos a mostrar en la página actual
 
     return (
         <>
@@ -65,6 +86,13 @@ const Projects = () => {
                         <i className="bi bi-folder-plus"></i> Nuevo Proyecto
                     </button>
                 </div>
+
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1">
+                        <i className="bi bi-search"></i>
+                    </span>
+                    <input type="text" className="form-control" placeholder="Buscar Proyecto o Empresa" aria-label="Search" aria-describedby="basic-addon1" onChange={handleSearch} />
+                </div>           
 
                 <div className="table-responsive">
                     <table className="table table-striped table-hover">
