@@ -133,10 +133,10 @@ const Client = () => {
                 value={client.contact}
                 onChange={handleChange}
             />
-            <Button variant="outlined" color="primary" onClick={() => navigate('/clientes')}>Cancelar</Button>
-            <Button type="submit" variant="contained" color="primary" style={{ marginTop: '1rem' }}>
+            <Button type="submit" variant="contained" color="primary">
                 {id === 'create' ? 'Crear' : 'Guardar Cambios'}
             </Button>
+            <Button variant="outlined" color="primary" onClick={() => navigate('/clientes')}>Cancelar</Button>
         </form>
     );
 };
