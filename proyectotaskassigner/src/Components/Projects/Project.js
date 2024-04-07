@@ -124,3 +124,33 @@ const Project = ({ match }) => {
 };
 
 export default Project;
+
+
+
+
+//<form onSubmit={handleSubmit}>
+//    <Typography variant="h5">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</Typography>
+//    <TextField
+//        fullWidth
+//        label="Nombre del Proyecto"
+//        name="name"
+//        value={project.name}
+//        onChange={handleChange}
+//    />
+//    <FormControl fullWidth>
+//        <InputLabel>Seleccionar Cliente</InputLabel>
+//        <Select
+//            name="clientId"
+//            value={project.clientId}
+//            onChange={handleChange}
+//        >
+//            {clients.map(client => (
+//                <MenuItem key={client.id} value={client.id}>{client.name}</MenuItem>
+//            ))}
+//        </Select>
+//    </FormControl>
+//    <Button variant="outlined" color="primary" onClick={() => navigate('/proyectos')}>Cancelar</Button>
+//    <Button type="submit" variant="contained" color="primary" style={{ marginTop: '1rem' }}>
+//        {id === 'create' ? 'Crear' : 'Guardar Cambios'}
+//    </Button>
+//</form>
