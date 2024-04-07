@@ -11,6 +11,7 @@ const Project = () => {
     const [isEdit, setIsEdit] = useState(false);
     const authToken = getAuthToken();
     const [showModal, setShowModal] = useState(false);
+    const [errors, setErrors] = useState({ name: '', clientId: '' }); 
 
     useEffect(() => {
         if (!authToken) {
@@ -47,66 +48,102 @@ const Project = () => {
     }, [isEdit]);
 
     const handleChange = (e) => {
-        setProject({ ...project, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setProject({ ...project, [name]: value });
+        validateField(name, value); 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const apiUrl = id === "create" ? 'https://localhost:7153/api/Projects/' : `https://localhost:7153/api/Projects/${id}`;
-        const axiosMethod = id === "create" ? axios.post : axios.put;
+        if (validateForm()) { 
+            const apiUrl = id === "create" ? 'https://localhost:7153/api/Projects/' : `https://localhost:7153/api/Projects/${id}`;
+            const axiosMethod = id === "create" ? axios.post : axios.put;
 
-        axiosMethod(apiUrl, project, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Content-Type': 'application/json',
+            axiosMethod(apiUrl, project, {
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(() => navigate('/proyectos'))
+                .catch((error) => console.error('Error al obtener la información de los proyectos'));
+
+            console.log('Formulario enviado:', project);
+        } else {
+            console.log('El formulario no es válido.');
+        }
+    };
+
+    const validateField = (fieldName, value) => { 
+        let errorMessage = '';
+        switch (fieldName) {
+            case 'name':
+                errorMessage = value.trim() === '' ? 'El nombre del proyecto es requerido' : '';
+                break;
+            case 'clientId':
+                errorMessage = value === '' ? 'Debe seleccionar un cliente' : '';
+                break;
+            default:
+                break;
+        }
+        setErrors({ ...errors, [fieldName]: errorMessage });
+    };
+
+    const validateForm = () => { 
+        let isValid = true;
+        for (const key in project) {
+            if (Object.hasOwnProperty.call(project, key)) {
+                validateField(key, project[key]);
+                if (errors[key]) {
+                    isValid = false;
+                }
             }
-        })
-            .then(() => navigate('/proyectos'))
-            .catch((error) => console.error('Error al obtener la información de los proyectos'));
-
-        console.log('Formulario enviado:', project);
+        }
+        return isValid;
     };
 
     return (
         <>
             <div className="container mt-5 text-center">
-            <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>
-                {id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}
+                <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>
+                    {id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}
                 </button>
                 <button className="btn btn-danger" onClick={() => navigate('/proyectos')}>Cancelar</button>
-            {showModal && (
-                <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</h5>
-                                <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
-                            </div>
-                            <div className="modal-body">
-                                <form onSubmit={handleSubmit}>
-                                    <div className="mb-3">
-                                        <label htmlFor="projectName" className="form-label">Nombre del Proyecto</label>
-                                        <input type="text" className="form-control" id="projectName" name="name" value={project.name} onChange={handleChange} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="clientSelect" className="form-label">Seleccionar Cliente</label>
-                                        <select className="form-select" id="clientSelect" name="clientId" value={project.clientId} onChange={handleChange}>
-                                            {clients.map(client => (
-                                                <option key={client.id} value={client.id}>{client.name}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="submit" className="btn btn-primary me-2">
-                                            {id === 'create' ? 'Crear' : 'Guardar Cambios'}
-                                        </button>
-                                        <button type="button" className="btn btn-outline-primary me-2" onClick={() => navigate('/proyectos')}>Cancelar</button>
-                                    </div>
-                                </form>
+                {showModal && (
+                    <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</h5>
+                                    <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                                </div>
+                                <div className="modal-body">
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="mb-3">
+                                            <label htmlFor="projectName" className="form-label">Nombre del Proyecto</label>
+                                            <input type="text" className="form-control" id="projectName" name="name" value={project.name} onChange={handleChange} />
+                                            {errors.name && <div className="text-danger">{errors.name}</div>} 
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="clientSelect" className="form-label">Seleccionar Cliente</label>
+                                            <select className="form-select" id="clientSelect" name="clientId" value={project.clientId} onChange={handleChange}>
+                                                {clients.map(client => (                                                                                                        
+                                                    <option key={client.id} value={client.id}>{client.name}</option>
+                                                ))}
+                                            </select>
+                                            {errors.clientId && <div className="text-danger">{errors.clientId}</div>} 
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="submit" className="btn btn-primary me-2">
+                                                {id === 'create' ? 'Crear' : 'Guardar Cambios'}
+                                            </button>
+                                            <button type="button" className="btn btn-outline-primary me-2" onClick={() => navigate('/proyectos')}>Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 )}
             </div>
         </>

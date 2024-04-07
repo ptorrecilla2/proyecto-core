@@ -112,13 +112,16 @@ const Projects = () => {
                                     <td>{project.client.name}</td>
                                     <td>
                                         <button className="btn btn-outline-success me-2" onClick={() => navigate(`/proyectos/${project.id}/tareas`)}>
-                                            <i className="bi bi-eye"></i> Ver Tareas
+                                            <i className="bi bi-eye"></i> 
+                                            <span className="d-none d-sm-inline"> Tareas</span>
                                         </button>
                                         <button className="btn btn-outline-primary me-2" onClick={() => handleEdit(project.id)}>
-                                            <i className="bi bi-pencil-square"></i> Editar
+                                            <i className="bi bi-pencil-square"></i>
+                                            <span className="d-none d-sm-inline"> Editar</span>
                                         </button>
                                         <button className="btn btn-outline-danger me-2" onClick={() => handleDelete(project.id)}>
-                                            <i className="bi bi-trash3"></i> Eliminar
+                                            <i className="bi bi-trash3"></i>
+                                            <span className="d-none d-sm-inline"> Eliminar</span>
                                         </button>
                                     </td>
                                 </tr>
