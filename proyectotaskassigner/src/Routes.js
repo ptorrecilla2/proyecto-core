@@ -11,6 +11,7 @@ import ClientList from './Components/Clients/ClientList';
 import TaskDetailsComponent from './Components/Tasks/TaskDetailComponent';
 import TaskListAsigned from './Components/Tasks/TaskListAsigned';
 import TasksFromProject from './Components/Tasks/TasksFromProject';
+import AllTasks from './Components/Tasks/AllTasks';
 
 const AppRoutes = () => {
     return (
@@ -18,10 +19,14 @@ const AppRoutes = () => {
             <Routes>
                 <Route exact path="/" element={<Navigate to='/profile' />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Login />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/tareasasignadas/:id" element={<TaskListAsigned />} />
+                <Route path="/tareas/create" element={<Task />} />
                 <Route path="/tareas/:id" element={<TaskDetailsComponent />} />
-                <Route path="/tareas" element={<TaskList />} />
+                <Route path="/tareas" element={<AllTasks />} />
+
+                
                 
                 <Route path="/proyectos" element={<ProjectList />} />
                 <Route path="/proyectos/:id/tareas" element={<TasksFromProject/>} />

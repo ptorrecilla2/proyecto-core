@@ -101,11 +101,61 @@ namespace ProyectoCore.Controllers
         [HttpPost]
         public async Task<ActionResult<ProjectTask>> PostProjectTask(ProjectTask projectTask)
         {
+            if (projectTask.ProjectId == null && projectTask.Project.Id == null)
+            {
+                return BadRequest();
+            }
+            
+            projectTask.ProjectId = projectTask.Project.Id;
+            _context.ProjectTasks.Add(projectTask);
+            await _context.SaveChangesAsync();
+            
+            return CreatedAtAction("GetProjectTask", new { id = projectTask.Id }, projectTask);
+        }
+
+        [HttpPost("saveTask")]
+        public async Task<ActionResult<ProjectTask>> SaveProjectTask(int idDev, int idManager, [FromBody] ProjectTask projectTask)
+        {
+            if (projectTask.ProjectId == null && projectTask.Project.Id == null)
+            {
+                return BadRequest();
+            }
+            projectTask.ProjectId = projectTask.Project.Id;
+            var project = await _context.Projects.FindAsync(projectTask.ProjectId);
+            projectTask.Project = project;
+            
             _context.ProjectTasks.Add(projectTask);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProjectTask", new { id = projectTask.Id }, projectTask);
+            // Obtener el ID de la tarea creada
+            int createdTaskId = projectTask.Id;
+
+            // Crear instancias de UserTask para el desarrollador y el gerente
+            UserTask userTaskDev = new UserTask
+            {
+                UserId = idDev,
+                TaskId = createdTaskId,
+                TaskRole = "Dev"
+            };
+
+            UserTask userTaskManager = new UserTask
+            {
+                UserId = idManager,
+                TaskId = createdTaskId,
+                TaskRole = "Manager"
+            };
+
+            // Agregar las nuevas instancias de UserTask al contexto y guardar los cambios
+            _context.UserTasks.AddRange(userTaskDev, userTaskManager);
+            await _context.SaveChangesAsync();
+
+            // Devolver la tarea creada con su ID
+            return CreatedAtAction("GetProjectTask", new { id = createdTaskId }, projectTask);
         }
+
+
+
+
 
         // DELETE: api/ProjectTasks/5
         [HttpDelete("{id}")]
@@ -127,6 +177,20 @@ namespace ProyectoCore.Controllers
         {
             return _context.ProjectTasks.Any(e => e.Id == id);
         }
-        
+
+        [HttpPost("getProjectTaskOptions")]
+        public async Task<IActionResult> GetProjectTaskOptions()
+        {
+            var projects = await _context.Projects.ToListAsync();
+            var statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToDictionary(p => p.ToString(), p => (int)p);
+            var priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToDictionary(p => p.ToString(), p => (int)p);
+            var users = await _context.Users.Where(u => u.Role.Type == RoleType.Dev || u.Role.Type == RoleType.Manager).ToListAsync();
+
+            return Ok(new { ProjectList = projects, StatusList = statuses, PriorityList = priorities,Users = users });
+        }
+
     }
+
+    
+    
 }

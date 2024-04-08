@@ -9,6 +9,7 @@ namespace ProyectoCore.Models
     public class ProjectTask
     {
         [Key]
+        
         public int Id { get; set; }
         public string? Name { get; set; }
         public DateTime InitialDate { get; set; }
@@ -30,6 +31,24 @@ namespace ProyectoCore.Models
     {
         public ProjectTask ProjectTask { get; set; }
         public ICollection<UserTask> Participants { get; set; }
+
+        public Dictionary<string, int> priorityDictionary { get; set; }
+
+        public Dictionary<string, int> statusDictionary { get; set; }
+
+        public ProjectTaskDTO()
+        {
+            priorityDictionary = Enum.GetValues(typeof(Priority))
+            .Cast<Priority>()
+            .ToDictionary(p => p.ToString(), p => (int)p);
+            statusDictionary = Enum.GetValues(typeof(Status))
+            .Cast<Status>()
+            .ToDictionary(p => p.ToString(), p => (int)p);
+    }
+
+        
+
+
     }   
     public enum Priority
     {

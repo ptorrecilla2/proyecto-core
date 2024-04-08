@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoCore.Data;
 
@@ -11,9 +12,11 @@ using ProyectoCore.Data;
 namespace ProyectoCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408085518_m3")]
+    partial class m3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +126,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 4, 8, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3828),
+                            Date = new DateTime(2024, 4, 8, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1227),
                             Description = "Comentario de prueba 1",
                             TaskId = 1,
                             UserId = 1
@@ -131,7 +134,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 4, 8, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3831),
+                            Date = new DateTime(2024, 4, 8, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1229),
                             Description = "Comentario de prueba 2",
                             TaskId = 2,
                             UserId = 2
@@ -215,8 +218,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            FinalDate = new DateTime(2024, 4, 15, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3794),
-                            InitialDate = new DateTime(2024, 4, 8, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3735),
+                            FinalDate = new DateTime(2024, 4, 15, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1193),
+                            InitialDate = new DateTime(2024, 4, 8, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1144),
                             Name = "Task1",
                             Priority = 2,
                             ProjectId = 1,
@@ -225,8 +228,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            FinalDate = new DateTime(2024, 4, 13, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3801),
-                            InitialDate = new DateTime(2024, 4, 8, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3799),
+                            FinalDate = new DateTime(2024, 4, 13, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1201),
+                            InitialDate = new DateTime(2024, 4, 8, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1199),
                             Name = "Task2",
                             Priority = 1,
                             ProjectId = 2,
@@ -235,8 +238,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 3,
-                            FinalDate = new DateTime(2024, 4, 11, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3804),
-                            InitialDate = new DateTime(2024, 4, 8, 12, 32, 21, 198, DateTimeKind.Local).AddTicks(3803),
+                            FinalDate = new DateTime(2024, 4, 11, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1204),
+                            InitialDate = new DateTime(2024, 4, 8, 10, 55, 17, 857, DateTimeKind.Local).AddTicks(1203),
                             Name = "Task3",
                             Priority = 0,
                             ProjectId = 3,

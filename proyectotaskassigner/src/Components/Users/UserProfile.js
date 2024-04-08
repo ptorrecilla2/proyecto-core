@@ -1,13 +1,13 @@
 import React, { useEffect,useState } from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { logout, getAuthToken } from '../../Services/AuthService';
+
+import { logout, getAuthToken , getRole} from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom'; 
 
 
-const NavBar = ({ onLogout }) => {
-    
+const NavBar = () => {
+    const role = getRole();
     const [user, setUser] = useState({});
     const navigate = useNavigate();
     useEffect(() => {
@@ -56,15 +56,28 @@ const NavBar = ({ onLogout }) => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
+                            {role === 'Admin' ? (
+                                <>
                             <li className="nav-item">
                                 <a className="nav-link active" aria-current="page" href="/proyectos">Proyectos</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/clientes">Clientes</a>
                             </li>
+                            
                             <li className="nav-item">
-                                <a className="nav-link" onClick={() => navigate("/tareasAsignadas/" + user.id) }>Tareas Asignadas</a>
-                            </li>                            
+                                <a className="nav-link" href="/users">Usuarios</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/tareas">Tareas</a>
+                            </li>
+                            </>
+                        ):(
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => navigate("/tareasAsignadas/" + user.id) }>Tareas Asignadas</button>
+                            </li>
+                        )}
+                                                        
                         </ul>
                     </div>
                 </div>

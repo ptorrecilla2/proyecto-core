@@ -129,8 +129,9 @@ namespace ProyectoCore.Controllers
             // Replace this logic with your actual authentication mechanism
             if (IsValidUser(model.Email, model.Password))
             {
+                var user = _context.Users.Include(u=>u.Role).FirstOrDefault(u => u.Email == model.Email);
                 var token = GenerateJwtToken(model.Email);
-                return Ok(new { Token = token });
+                return Ok(new { Token = token,Role = user.Role });
             }
 
             return Unauthorized();

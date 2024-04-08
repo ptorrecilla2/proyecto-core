@@ -1,10 +1,13 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { getRole } from '../../Services/AuthService';
 
 function TaskList({ tasks }) {
-    const navigate = useNavigate();
+  const role = getRole();
+  const navigate = useNavigate();
+
   const groupTasksByStatus = () => {
     const groupedTasks = {};
     tasks.forEach(task => {
@@ -29,8 +32,7 @@ function TaskList({ tasks }) {
           <div>
             {groupedTasks[status].map(task => (
               <div key={task.id}>
-                <Typography onClick={()=>navigate('/tareas/'+task.id)}>{task.name}</Typography>
-                
+                <Typography onClick={() => navigate('/tareas/' + task.id)}>{task.name}</Typography>
               </div>
             ))}
           </div>
@@ -41,6 +43,11 @@ function TaskList({ tasks }) {
 
   return (
     <div>
+      {role === 'Admin' && (
+        <Button variant="contained" color="primary" onClick={() => navigate('/tareas/create')}>
+          Crear Tarea
+        </Button>
+      )}
       {renderTasksByStatus()}
     </div>
   );

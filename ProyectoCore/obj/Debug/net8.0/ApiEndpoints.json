@@ -493,6 +493,52 @@
     ]
   },
   {
+    "ContainingType": "ProyectoCore.Controllers.ProjectTasksController",
+    "Method": "GetProjectTaskOptions",
+    "RelativePath": "api/ProjectTasks/getProjectTaskOptions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProyectoCore.Controllers.ProjectTasksController",
+    "Method": "SaveProjectTask",
+    "RelativePath": "api/ProjectTasks/saveTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idDev",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idManager",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "projectTask",
+        "Type": "ProyectoCore.Models.ProjectTask",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ProyectoCore.Models.ProjectTask",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ProyectoCore.Controllers.UsersController",
     "Method": "GetUsers",
     "RelativePath": "api/Users",

@@ -14,19 +14,28 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
+  MenuItem,
 } from "@mui/material";
-import { Edit, Delete } from "@mui/icons-material";
+import { Edit, Delete, Save, Cancel } from "@mui/icons-material";
 
 const TaskDetailsComponent = () => {
   const [task, setTask] = useState(null);
-  const [participants, setParticipants] = useState([]); // Assuming participants are returned with task data
+  const [participants, setParticipants] = useState([]);
   const [comments, setComments] = useState([]);
   const { id } = useParams();
   const [newComment, setNewComment] = useState("");
   const [userId, setUserId] = useState("");
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingCommentContent, setEditingCommentContent] = useState("");
+  const [isEditingTask, setIsEditingTask] = useState(false);
+  const [editedTask, setEditedTask] = useState(null);
+  const [priority, setPriority] = useState("");
+  const [status, setStatus] = useState("");
+  const [statusOptions, setStatusOptions] = useState({});
+  const [priorityOptions, setPriorityOptions] = useState({});
+  
   const navigate = useNavigate();
+
   if (!getAuthToken()) {
     navigate("/login");
   }
@@ -36,7 +45,6 @@ const TaskDetailsComponent = () => {
   };
 
   useEffect(() => {
-    // Fetch task details and comments when component mounts
     fetchTaskDetails();
   }, []);
 
@@ -60,11 +68,16 @@ const TaskDetailsComponent = () => {
       );
       setTask(responseTask.data.projectTask);
       setParticipants(responseTask.data.participants.map((p) => ({name:p.user.name + ' ' +p.user.lastName, role:p.taskRole})));
+      setStatusOptions(responseTask.data.statusDictionary);
+      setPriorityOptions(responseTask.data.priorityDictionary);
+      setPriority(responseTask.data.projectTask.priority);
+      setStatus(responseTask.data.projectTask.status);
       setComments(
         responseComments.data.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         )
-      ); // Assuming comments are returned with task data
+      );
+      
     } catch (error) {
       console.error("Error fetching task details:", error);
     }
@@ -81,8 +94,8 @@ const TaskDetailsComponent = () => {
         [...comments, response.data].sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         )
-      ); // Add new comment to the list
-      setNewComment(""); // Clear the comment input field
+      );
+      setNewComment("");
     } catch (error) {
       console.error("Error creating comment:", error);
     }
@@ -96,12 +109,14 @@ const TaskDetailsComponent = () => {
       console.error("Error deleting comment:", error);
     }
   };
+
   const handleCommentEdit = (commentId) => {
     setEditingCommentId(commentId);
   };
+
   const handleCommentEditSubmit = async (commentId, newContent) => {
-    if(!newContent.trim()) return alert("El comentario no puede estar vacio ni puede ser igual al anterior");
-    
+    if (!newContent.trim()) return alert("El comentario no puede estar vacio ni puede ser igual al anterior");
+
     try {
       await axios.put(
         `https://localhost:7153/api/Comments/${commentId}`,
@@ -117,13 +132,43 @@ const TaskDetailsComponent = () => {
           )
           .sort((a, b) => new Date(b.date) - new Date(a.date))
       );
-        setEditingCommentId(null);
-        setEditingCommentContent("");
+      setEditingCommentId(null);
+      setEditingCommentContent("");
     } catch (error) {
       console.error("Error editing comment:", error);
     }
   };
-  var showComment = (comment) => {
+
+  const handleTaskEdit = () => {
+    setIsEditingTask(true);
+    setEditedTask({ ...task });
+  };
+
+  const handleTaskCancel = () => {
+    setIsEditingTask(false);
+  };
+
+  const handleTaskSave = async () => {
+    try {
+      await axios.put(
+        `https://localhost:7153/api/ProjectTasks/${id}`,
+        editedTask,
+        { headers }
+      );
+      setIsEditingTask(false);
+      setTask({ ...editedTask});
+    } catch (error) {
+      console.error("Error saving task:", error);
+    }
+  };
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  };
+
+
+  const showComment = (comment) => {
     if (editingCommentId === comment.id) {
       return (
         <TextField
@@ -140,11 +185,11 @@ const TaskDetailsComponent = () => {
     }
     return <ListItemText primary={comment.description} />;
   };
+  
   const showButtons = (comment) => {
     if (editingCommentId === comment.id) {
       return (
         <>
-            
           <Button
             variant="contained"
             color="primary"
@@ -152,9 +197,15 @@ const TaskDetailsComponent = () => {
               handleCommentEditSubmit(comment.id, editingCommentContent)
             }
           >
-            Actualizar
+            Update
           </Button>
-          
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setEditingCommentId(null)}
+          >
+            Cancel
+          </Button>
         </>
       );
     }
@@ -177,9 +228,20 @@ const TaskDetailsComponent = () => {
       </ListItemSecondaryAction>
     );
   };
-  const formatDate = (date) => {
-    const d = new Date(date);
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  const handlePriorityChange = (event) => {
+    setEditedTask({ ...editedTask, priority: event.target.value });
+  };
+  
+  const handleStatusChange = (event) => {
+    setEditedTask({ ...editedTask, status: event.target.value });
+  };
+  
+  const handleInitialDateChange = (event) => {
+    setEditedTask({ ...editedTask, initialDate: event.target.value });
+  };
+  
+  const handleFinalDateChange = (event) => {
+    setEditedTask({ ...editedTask, finalDate: event.target.value });
   };
   return (
     <Grid container spacing={2}>
@@ -187,15 +249,117 @@ const TaskDetailsComponent = () => {
         <Grid item xs={12}>
           <Paper elevation={3} style={{ padding: 20 }}>
             <Typography variant="h5">Task Details</Typography>
-            <Typography>ID: {task.id}</Typography>
-            <Typography>Descipcion: {task.name}</Typography>
-            <Typography>Fecha de Creacion: {formatDate(task.initialDate)}</Typography>
-            <Typography>Fecha Vencimiento: {formatDate(task.finalDate)}</Typography>
-            <Typography>Proyecto: {task.project.name }</Typography>
-            <Typography>Prioridad: {task.priority}</Typography>
-            <Typography>Estado: {task.status}</Typography>
-            <Typography>Desarrollador: {participants.find(p=>p.role == 'Dev')?.name}</Typography>
-            <Typography>Manager: {participants.find(p=>p.role == 'Manager')?.name}</Typography>
+            {!isEditingTask ? (
+              <>
+                <Typography>Descipcion: {task.name}</Typography>
+                <Typography>Fecha de Creacion: {formatDate(task.initialDate)}</Typography>
+                <Typography>Fecha Vencimiento: {formatDate(task.finalDate)}</Typography>
+                <Typography>Proyecto: {task.project.name }</Typography>
+                <Typography>Prioridad: {task.priority}</Typography>
+                <Typography>Estado: {task.status}</Typography>
+                <Typography>Desarrollador: {participants.find(p=>p.role == 'Dev')?.name}</Typography>
+                <Typography>Manager: {participants.find(p=>p.role == 'Manager')?.name}</Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleTaskEdit}
+                >
+                  Editar
+                </Button>
+              </>
+            ) : (
+              <>
+                <TextField
+                  label="Descripcion"
+                  value={editedTask.name}
+                  onChange={(e) =>
+                    setEditedTask({ ...editedTask, name: e.target.value })
+                  }
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Fecha de Creacion"
+                  type="date"
+                  value={editedTask.initialDate}
+                  onChange={handleInitialDateChange}
+                  
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Fecha Vencimiento"
+                  type="date"
+                  value={editedTask.finalDate}
+                  onChange={handleFinalDateChange}
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Proyecto"
+                  value={editedTask.project.name}
+                  disabled
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Prioridad"
+                  select
+                  value={editedTask.priority}
+                  onChange={handlePriorityChange}
+                  fullWidth
+                  margin="normal"
+                >
+                  {Object.keys(priorityOptions).map((priorityKey) => (
+                    <MenuItem key={priorityKey} value={priorityKey}>
+                      {priorityKey}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  label="Estado"
+                  select
+                  value={editedTask.status}
+                  onChange={handleStatusChange}
+                  fullWidth
+                  margin="normal"
+                >
+                  {Object.keys(statusOptions).map((statusKey) => (
+                    <MenuItem key={statusKey} value={statusKey}>
+                      {statusKey}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  label="Desarrollador"
+                  value={participants.find(p=>p.role == 'Dev')?.name}
+                  disabled
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  label="Manager"
+                  value={participants.find(p=>p.role == 'Manager')?.name}
+                  disabled
+                  fullWidth
+                  margin="normal"
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleTaskSave}
+                >
+                  Guardar
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleTaskCancel}
+                >
+                  Cancelar
+                </Button>
+              </>
+            )}
           </Paper>
         </Grid>
       )}
