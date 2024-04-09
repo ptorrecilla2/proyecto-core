@@ -1,6 +1,4 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Button } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from 'react-router-dom';
 import { getRole } from '../../Services/AuthService';
 
@@ -24,33 +22,60 @@ function TaskList({ tasks }) {
     const statusList = Object.keys(groupedTasks);
 
     return statusList.map(status => (
-      <Accordion key={status}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{status}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <div>
-            {groupedTasks[status].map(task => (
-              <div key={task.id}>
-                <Typography onClick={() => navigate('/tareas/' + task.id)}>{task.name}</Typography>
-              </div>
-            ))}
-          </div>
-        </AccordionDetails>
-      </Accordion>
-    ));
-  };
+        <div key={status}>
+            <div className="accordion" id={`accordion-${status}`}>
+                <div className="accordion-item">
+                    <h2 className="accordion-header" id={`heading-${status}`}>
+                        <button
+                            className="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#collapse-${status}`}
+                            aria-expanded="true"
+                            aria-controls={`collapse-${status}`}
+                        >
 
-  return (
-    <div>
-      {role === 'Admin' && (
-        <Button variant="contained" color="primary" onClick={() => navigate('/tareas/create')}>
-          Crear Tarea
-        </Button>
-      )}
-      {renderTasksByStatus()}
-    </div>
-  );
+                            {status}
+                        </button>
+                    </h2>
+                    <div
+                        id={`collapse-${status}`}
+                        className="accordion-collapse collapse show"
+                        aria-labelledby={`heading-${status}`}
+                        data-bs-parent={`#accordion-${status}`}
+                    >
+                        <div className="accordion-body">
+                            {groupedTasks[status].map(task => (
+                                <div key={task.id} className="d-flex justify-content-between align-items-center mb-3">
+                                    <h5>{task.name}</h5>
+                                    <button className="btn btn-outline-success btn" onClick={() => navigate('/tareas/' + task.id)}><i className="bi bi-eye"> Ver</i></button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    ));
+    };
+
+    return (
+        <div className="container mt-5">
+            <div>
+                <h1 className="text-center text-primary display-4">Tareas</h1>
+                <hr className="text-primary" />
+            </div>
+            <div className="mt-4">
+                {role === 'Admin' && (
+                    <button className="btn btn-success mb-3" onClick={() => navigate('/tareas/create')}>
+                        <i className="bi bi-file-earmark-plus"> Crear Tarea</i> 
+                    </button>
+                )}
+                    {renderTasksByStatus()}
+            </div>
+        </div>
+    );
 }
 
 export default TaskList;

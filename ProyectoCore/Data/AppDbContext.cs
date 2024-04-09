@@ -17,7 +17,7 @@ namespace ProyectoCore.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }        
         public DbSet<Comment> Comments { get; set; }
-
+         public DbSet<Notification> Notifications { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
 
         //Quitamos la pluralidad de las tablas
@@ -30,6 +30,7 @@ namespace ProyectoCore.Data
             modelBuilder.Entity<ProjectTask>().ToTable("ProjectTask");
             modelBuilder.Entity<Comment>().ToTable("Comment");
             modelBuilder.Entity<UserTask>().ToTable("UserTask");
+            modelBuilder.Entity<Notification>().ToTable("Notification");
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }

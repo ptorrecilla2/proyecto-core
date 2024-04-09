@@ -56,7 +56,15 @@ namespace ProyectoCore.Controllers
             }
 
             _context.Entry(comment).State = EntityState.Modified;
-
+            //add notification to the user that a comment was edited
+            Notification notification = new Notification
+            {
+                Title = "Comment Edited",
+                Message = "A comment was edited",
+                Url = "http://localhost:3000/tareas/" + comment.TaskId,
+                UserId = comment.UserId,
+                Date = DateTime.Now
+            };
             try
             {
                 await _context.SaveChangesAsync();
@@ -95,6 +103,16 @@ namespace ProyectoCore.Controllers
                 return BadRequest("La tarea no existe");
             }
             comment.User = user;
+            //add notification to the user that a comment was added
+            Notification notification = new Notification
+            {
+                Title = "Comment Added",
+                Message = "A comment was added to a task you are assigned to",
+                Url = "http://localhost:3000/tareas/" + comment.TaskId,
+                UserId = user.Id,
+                Date = DateTime.Now
+            };
+            _context.Notifications.Add(notification);
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 

@@ -1,5 +1,4 @@
 import React ,{useState,useEffect}from 'react';
-import { Grid, Paper, Typography, TextField, MenuItem, Button } from '@mui/material';
 import axios from 'axios';
 import { getAuthToken } from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
@@ -76,127 +75,93 @@ useEffect(() => {
             `https://localhost:7153/api/ProjectTasks/saveTask?idDev=${newTask.dev.id}&idManager=${newTask.manager.id}`,
             newTask,
             { headers }
-          );
+            );
+            console.log("Enviado");
           setnewTask({ });
-          navigate("/tareas");
+          navigate("/tareas/");
         } catch (error) {
           console.error("Error saving task:", error);
         }
       };
     return (
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ padding: 20 }}>
-            <Typography variant="h5">Task Form</Typography>
-        
-        <TextField
-          label="Descripcion"
-          value={newTask.name}
-          onChange={(e) =>
-            setnewTask({ ...newTask, name: e.target.value })
-          }
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Fecha de Creacion"
-          type="date"
-          value={newTask.initialDate}
-          onChange={handleInitialDateChange}
-          
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Fecha Vencimiento"
-          type="date"
-          value={newTask.finalDate}
-          onChange={handleFinalDateChange}
-          fullWidth
-          margin="normal"
-        />
-        
-        <TextField
-          label="Proyecto"
-          select
-          value={newTask.project.id}
-          onChange={handleProjectChange}
-          fullWidth
-          margin="normal"
-        >
-          {projects.map((projectKey) => (
-            <MenuItem key={projectKey.id} value={projectKey.id}>
-              {projectKey.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Prioridad"
-          select
-          value={newTask.priority}
-          onChange={handlePriorityChange}
-          fullWidth
-          margin="normal"
-        >
-          {Object.keys(priorityOptions).map((priorityKey) => (
-            <MenuItem key={priorityKey} value={priorityKey}>
-              {priorityKey}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Estado"
-          select
-          value={newTask.status}
-          onChange={handleStatusChange}
-          fullWidth
-          margin="normal"
-        >
-          {Object.keys(statusOptions).map((statusKey) => (
-            <MenuItem key={statusKey} value={statusKey}>
-              {statusKey}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Desarrollador"
-          select
-          value={newTask.dev.id}
-          onChange={handleDevChange}
-          fullWidth
-          margin="normal"
-        >
-          {participants.map((user) => (
-            <MenuItem key={user.id} value={user.id}>
-              {user.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label="Manager"
-          select
-          value={newTask.manager.id}
-          onChange={handleManagerChange}
-          fullWidth
-          margin="normal"
-        >
-          {participants.map((user) => (
-            <MenuItem key={user.id} value={user.id}>
-              {user.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleTaskSave}
-        >
-          Guardar
-        </Button>
-        
-        
-    
-  </Paper>
-</Grid>
+        <div className="container mt-5">
+            <div className="text-center">
+                <h1 className="text-primary">Tarea</h1>
+                <hr className="text-primary" />
+            </div>
+
+            <div className="row justify-content-center mt-5">
+                <div className="col-md-6">
+                    <div className="card mb-5">
+                        <div className="card-header">
+                            <h5 className="card-title">Task Form</h5>
+                        </div>
+                        <div className="card-body">
+                            <form onSubmit={handleTaskSave}>
+                                <div className="mb-3">
+                                    <label htmlFor="description" className="form-label">Descripcion</label>
+                                    <input type="text" className="form-control" id="description" name="name" value={newTask.name} onChange={(e) => setnewTask({ ...newTask, name: e.target.value })} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="initialDate" className="form-label">Fecha de Inicio</label>
+                                    <input type="date" className="form-control" id="initialDate" name="initialDate" value={newTask.initialDate} onChange={handleInitialDateChange} />
+
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="finalDate" className="form-label">Fecha de Entrega</label>
+                                    <input type="date" className="form-control" id="finalDate" name="finalDate" value={newTask.finalDate} onChange={handleFinalDateChange} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="project" className="form-label">Proyecto</label>
+                                    <select className="form-select" id="project" name="project" value={newTask.project.id} onChange={handleProjectChange}>
+                                        {projects.map((projectKey) => (
+                                            <option key={projectKey.id} value={projectKey.id}>{projectKey.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="priority" className="form-label">Prioridad</label>
+                                    <select className="form-select" name="priority" id="priority" value={newTask.priority} onChange={handlePriorityChange}>
+                                        {Object.keys(priorityOptions).map((priorityKey) => (
+                                            <option key={priorityKey} value={priorityKey}>{priorityKey}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="status" className="form-label">Estado</label>
+                                    <select className="form-select" id="status" name="status" value={newTask.status} onChange={handleStatusChange}>
+                                        {Object.keys(statusOptions).map((statusKey) => (
+                                            <option key={statusKey} value={statusKey}>{statusKey}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="dev" className="form-label">Desarrollador</label>
+                                    <select className="form-select" id="dev" name="dev" value={newTask.dev.id} onChange={handleDevChange}>
+                                        {participants.map((user) => (
+                                            <option key={user.id} value={user.id}>{user.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="manager" className="form-label">Manager</label>
+                                    <select className="form-select" name="manager" id="manager" value={newTask.manager.id} onChange={handleManagerChange}>
+                                        {participants.map((user) => (
+                                            <option key={user.id} value={user.id}>{user.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="card-footer text-end">
+                                    <button type="submit" className="btn btn-primary me-2">Guardar</button>
+                                    <button type="button" className="btn btn-secondary me-2" onClick={() => navigate('/tareas')}>Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
+    
 }
 export default Task;

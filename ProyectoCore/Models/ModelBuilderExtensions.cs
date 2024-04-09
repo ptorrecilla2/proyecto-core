@@ -62,6 +62,8 @@ namespace ProyectoCore.Models
                 new UserTask { Id = 3, UserId = 2, TaskId = 2, TaskRole="Dev" },
                 new UserTask { Id = 4, UserId = 4, TaskId = 2, TaskRole="Tester" }
                 );
+
+            
         }
                                                       
     }

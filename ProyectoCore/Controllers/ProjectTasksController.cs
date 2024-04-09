@@ -76,6 +76,20 @@ namespace ProyectoCore.Controllers
             }
 
             _context.Entry(projectTask).State = EntityState.Modified;
+            //add notification saying a task was modified to both users using userTask table
+            var userTasks = await _context.UserTasks.Where(u => u.TaskId == id).ToListAsync();
+            foreach (var userTask in userTasks)
+            {
+                Notification notification = new Notification
+                {
+                    Title = "Task Modified",
+                    Message = "A task you are assigned to has been modified",
+                    Url = "http://localhost:3000/tareas/" + id,
+                    UserId = userTask.UserId,
+
+                };
+                _context.Notifications.Add(notification);
+            }
 
             try
             {
@@ -147,6 +161,25 @@ namespace ProyectoCore.Controllers
 
             // Agregar las nuevas instancias de UserTask al contexto y guardar los cambios
             _context.UserTasks.AddRange(userTaskDev, userTaskManager);
+
+            //add notifications to the users that rediret to the task
+            Notification notificationDev = new Notification
+            {
+                Title = "New Task",
+                Message = "You have a new task",
+                Url = "http://localhost:3000/tareas/" + createdTaskId,
+                UserId = idDev,
+                Date = DateTime.Now
+            };
+
+            Notification notificationManager = new Notification
+            {
+                Title = "New Task",
+                Message = "You have a new task",
+                Url = "/task/" + createdTaskId,
+                UserId = idManager,
+                Date = DateTime.Now
+            };
             await _context.SaveChangesAsync();
 
             // Devolver la tarea creada con su ID
@@ -184,7 +217,7 @@ namespace ProyectoCore.Controllers
             var projects = await _context.Projects.ToListAsync();
             var statuses = Enum.GetValues(typeof(Status)).Cast<Status>().ToDictionary(p => p.ToString(), p => (int)p);
             var priorities = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToDictionary(p => p.ToString(), p => (int)p);
-            var users = await _context.Users.Where(u => u.Role.Type == RoleType.Dev || u.Role.Type == RoleType.Manager).ToListAsync();
+            var users = await _context.Users.Include(u=>u.Role).Where(u => u.Role.Type == RoleType.Dev || u.Role.Type == RoleType.Manager).ToListAsync();
 
             return Ok(new { ProjectList = projects, StatusList = statuses, PriorityList = priorities,Users = users });
         }

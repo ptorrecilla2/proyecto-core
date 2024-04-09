@@ -242,162 +242,185 @@ const TaskDetailsComponent = () => {
   
   const handleFinalDateChange = (event) => {
     setEditedTask({ ...editedTask, finalDate: event.target.value });
-  };
-  return (
-    <Grid container spacing={2}>
-      {task && (
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ padding: 20 }}>
-            <Typography variant="h5">Task Details</Typography>
-            {!isEditingTask ? (
-              <>
-                <Typography>Descipcion: {task.name}</Typography>
-                <Typography>Fecha de Creacion: {formatDate(task.initialDate)}</Typography>
-                <Typography>Fecha Vencimiento: {formatDate(task.finalDate)}</Typography>
-                <Typography>Proyecto: {task.project.name }</Typography>
-                <Typography>Prioridad: {task.priority}</Typography>
-                <Typography>Estado: {task.status}</Typography>
-                <Typography>Desarrollador: {participants.find(p=>p.role == 'Dev')?.name}</Typography>
-                <Typography>Manager: {participants.find(p=>p.role == 'Manager')?.name}</Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleTaskEdit}
-                >
-                  Editar
-                </Button>
-              </>
-            ) : (
-              <>
-                <TextField
-                  label="Descripcion"
-                  value={editedTask.name}
-                  onChange={(e) =>
-                    setEditedTask({ ...editedTask, name: e.target.value })
-                  }
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Fecha de Creacion"
-                  type="date"
-                  value={editedTask.initialDate}
-                  onChange={handleInitialDateChange}
-                  
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Fecha Vencimiento"
-                  type="date"
-                  value={editedTask.finalDate}
-                  onChange={handleFinalDateChange}
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Proyecto"
-                  value={editedTask.project.name}
-                  disabled
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Prioridad"
-                  select
-                  value={editedTask.priority}
-                  onChange={handlePriorityChange}
-                  fullWidth
-                  margin="normal"
-                >
-                  {Object.keys(priorityOptions).map((priorityKey) => (
-                    <MenuItem key={priorityKey} value={priorityKey}>
-                      {priorityKey}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  label="Estado"
-                  select
-                  value={editedTask.status}
-                  onChange={handleStatusChange}
-                  fullWidth
-                  margin="normal"
-                >
-                  {Object.keys(statusOptions).map((statusKey) => (
-                    <MenuItem key={statusKey} value={statusKey}>
-                      {statusKey}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  label="Desarrollador"
-                  value={participants.find(p=>p.role == 'Dev')?.name}
-                  disabled
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Manager"
-                  value={participants.find(p=>p.role == 'Manager')?.name}
-                  disabled
-                  fullWidth
-                  margin="normal"
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleTaskSave}
-                >
-                  Guardar
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleTaskCancel}
-                >
-                  Cancelar
-                </Button>
-              </>
-            )}
-          </Paper>
-        </Grid>
-      )}
-      <Grid item xs={12}>
-        <Paper elevation={3} style={{ padding: 20 }}>
-          <Typography variant="h5">Comments</Typography>
-          <TextField
-            label="Add Comment"
-            variant="outlined"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            fullWidth
-            multiline
-            rows={3}
-            margin="normal"
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleCommentSubmit}
-          >
-            Add Comment
-          </Button>
-          <List>
-            {comments.map((comment) => (
-              <div key={comment.id + id}>
-                <Typography key={comment.id + id} variant="h8">
-                  Creado por {comment.user?.name} el {formatDate(comment.date)}
-                </Typography>
-                <ListItem key={comment.id}>{showComment(comment)}
-                {showButtons(comment)}
-                </ListItem>
-              </div>
-            ))}
-          </List>
-        </Paper>
-      </Grid>
-    </Grid>
+    };
+
+    return (
+        <>
+            <div className="container mt-5 mb-5">
+                <div className="text-center mb-5">
+                    <h1 className="text-primary">Tareas & Comentarios </h1>
+                    <hr className="text-primary" />
+                </div>
+                <Grid container spacing={2}>
+                        {task && (
+                            <Grid item xs={12}>
+                                <Paper elevation={3} style={{ padding: 20 }}>
+                                    <Typography variant="h5" style={{ color: '#48C9B0' }} className="mb-3">Detalles de la Tarea</Typography>
+                                    {!isEditingTask ? (
+                                        <>
+                                            <Typography className="d-flex justify-content align-items mb-1"> <h6 className="me-2">Descripcion:</h6> {task.name}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Fecha de Creacion: </h6> {formatDate(task.initialDate)}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Fecha Vencimiento: </h6>  {formatDate(task.finalDate)}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Proyecto:</h6> {task.project.name}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"> <h6 className="me-2">Prioridad: </h6>{task.priority}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Estado: </h6>{task.status}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Desarrollador:</h6> {participants.find(p => p.role == 'Dev')?.name}</Typography>
+                                            <Typography className="d-flex justify-content align-items mb-1"><h6 className="me-2">Manager: </h6>{participants.find(p => p.role == 'Manager')?.name}</Typography>
+                                  <Button
+                                      className="mt-3"
+                                      variant="contained"
+                                      color="primary"
+                                      style={{ backgroundColor: '#48C9B0', color: '#fff' }}
+                                      onClick={handleTaskEdit}
+
+                                  >
+                                      Editar
+                                  </Button>
+                              </>
+                          ) : (
+                              <>
+                                  <TextField
+                                      label="Descripcion"
+                                      value={editedTask.name}
+                                      onChange={(e) =>
+                                          setEditedTask({ ...editedTask, name: e.target.value })
+                                      }
+                                      fullWidth
+                                      margin="normal"
+                                  />
+                                  <TextField
+                                      label="Fecha de Creacion"
+                                      type="date"
+                                      value={editedTask.initialDate}
+                                      onChange={handleInitialDateChange}
+
+                                      fullWidth
+                                      margin="normal"
+                                  />
+                                  <TextField
+                                      label="Fecha Vencimiento"
+                                      type="date"
+                                      value={editedTask.finalDate}
+                                      onChange={handleFinalDateChange}
+                                      fullWidth
+                                      margin="normal"
+                                  />
+                                  <TextField
+                                      label="Proyecto"
+                                      value={editedTask.project.name}
+                                      disabled
+                                      fullWidth
+                                      margin="normal"
+                                  />
+                                  <TextField
+                                      label="Prioridad"
+                                      select
+                                      value={editedTask.priority}
+                                      onChange={handlePriorityChange}
+                                      fullWidth
+                                      margin="normal"
+                                  >
+                                      {Object.keys(priorityOptions).map((priorityKey) => (
+                                          <MenuItem key={priorityKey} value={priorityKey}>
+                                              {priorityKey}
+                                          </MenuItem>
+                                      ))}
+                                  </TextField>
+                                  <TextField
+                                      label="Estado"
+                                      select
+                                      value={editedTask.status}
+                                      onChange={handleStatusChange}
+                                      fullWidth
+                                      margin="normal"
+                                  >
+                                      {Object.keys(statusOptions).map((statusKey) => (
+                                          <MenuItem key={statusKey} value={statusKey}>
+                                              {statusKey}
+                                          </MenuItem>
+                                      ))}
+                                  </TextField>
+                                  <TextField
+                                      label="Desarrollador"
+                                      value={participants.find(p => p.role == 'Dev')?.name}
+                                      disabled
+                                      fullWidth
+                                      margin="normal"
+                                  />
+                                  <TextField
+                                      label="Manager"
+                                      value={participants.find(p => p.role == 'Manager')?.name}
+                                      disabled
+                                      fullWidth
+                                      margin="normal"
+                                            />
+                                            <div className="mt-3">
+                                                <Button
+                                                      className="me-2"
+                                                      variant="contained"
+                                                      color="primary"
+                                                      onClick={handleTaskSave}
+                                                  >
+                                                      Guardar
+                                                  </Button>
+                                                <Button
+                                                      className="me-2"
+                                                      variant="contained"
+                                                      color="secondary"
+                                                      onClick={handleTaskCancel}
+                                                  >
+                                                      Cancelar
+                                                </Button>
+                                            </div>
+
+                              </>
+                          )}
+                      </Paper>
+                  </Grid>
+                     )}
+                      <Grid item xs={12}>
+                        <Paper elevation={3} style={{ padding: 20 }}>
+                            <Typography variant="h5" style className="mb-3" style={{ color: '#2980B9' }}>Comentarios</Typography>
+                              <TextField
+                                  label="Add Comment"
+                                  variant="outlined"
+                                  value={newComment}
+                                  onChange={(e) => setNewComment(e.target.value)}
+                                  fullWidth
+                                  multiline
+                                  rows={3}
+                                  margin="normal"
+                              />
+                            <Button
+                                className="mt-3"
+                                variant="contained"
+                                color="primary"
+                                style={{ backgroundColor: '#2980B9', color: '#fff' }}
+                                onClick={handleCommentSubmit}
+                              >
+                                  Agregar Comentario
+                            </Button>
+                            <div className="container mt-3">
+                              <List>
+                                  {comments.map((comment) => (
+                                      <div key={comment.id + id}>
+                                          <Typography key={comment.id + id} variant="h8">
+                                              Creado por {comment.user?.name} el {formatDate(comment.date)}
+                                          </Typography>
+                                         
+                                          <ListItem key={comment.id}>{showComment(comment)}
+                                              {showButtons(comment)}
+                                          </ListItem>
+                                         
+                                      </div>
+                                  ))}
+                                </List>
+                              </div>
+                          </Paper>
+                      </Grid>
+                </Grid>
+            </div >
+      </>
   );
 };
 

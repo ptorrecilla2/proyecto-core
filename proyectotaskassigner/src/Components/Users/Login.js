@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import axios from 'axios';
 import { login, getAuthToken } from "../../Services/AuthService";
-//import { TextField, Button, Container, Typography } from '@mui/material';
-//import { Container, Form, Button } from 'react-bootstrap';
-//import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import "../Styles/Login.css";
 import { useNavigate } from "react-router-dom";
 
@@ -126,34 +122,6 @@ const Login = () => {
         </div>
       </div>
     </>
-
-    //<Container maxWidth="sm">
-    //    <Typography variant="h4" align="center" gutterBottom>
-    //        Iniciar Sesión
-    //    </Typography>
-    //    <form onSubmit={handleSubmit}>
-    //        <TextField
-    //            label="Correo Electrónico"
-    //            variant="outlined"
-    //            fullWidth
-    //            margin="normal"
-    //            value={email}
-    //            onChange={handleEmailChange}
-    //        />
-    //        <TextField
-    //            label="Contraseña"
-    //            type="password"
-    //            variant="outlined"
-    //            fullWidth
-    //            margin="normal"
-    //            value={password}
-    //            onChange={handlePasswordChange}
-    //        />
-    //        <Button type="submit" variant="contained" color="primary" fullWidth>
-    //            Iniciar Sesión
-    //        </Button>
-    //    </form>
-    //</Container>
   );
 };
 

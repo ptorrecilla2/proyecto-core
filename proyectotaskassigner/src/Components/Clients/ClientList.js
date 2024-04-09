@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getAuthToken } from '../../Services/AuthService';
-//import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+
 
 
 
@@ -89,9 +89,10 @@ const Clients = () => {
     return (
         <>
             <div className="container mt-5">
-                <h1 className="text-center text-primary display-4">Clientes de Project Allocator</h1>"
-                <hr className="text-primary" />
-
+                <div>
+                    <h1 className="text-center text-primary display-4">Clientes</h1>
+                    <hr className="text-primary" />
+                </div>
                 <div className="text-start">
                     <button className="btn btn-success mt-3 mb-5" onClick={() => navigate('/clientes/create')}>
                         <i className="bi bi-person-fill-add"></i> Añadir Cliente
@@ -163,44 +164,4 @@ const Clients = () => {
     };
 
 export default Clients;
-
-
-            //<Button variant="outlined" color="primary" onClick={() => navigate('/clientes/create') }> Crear Cliente </Button>
-            //<TableContainer component={Paper}>
-            //    <Table>
-            //        <TableHead>
-            //            <TableRow>
-                        
-            //                <TableCell>ID</TableCell>
-            //                <TableCell>Nombre del Cliente</TableCell>
-            //                <TableCell>Email</TableCell>
-            //                <TableCell>Telefono</TableCell>
-            //                <TableCell>Direccion</TableCell>
-            //                <TableCell>Ciudad</TableCell>
-            //                <TableCell>Pais</TableCell>
-            //                <TableCell>Contacto</TableCell>
-            //            </TableRow>
-            //        </TableHead>
-            //        <TableBody>
-            //            {clients.map((client) => (
-            //                <TableRow key={client.id}>
-            //                    <TableCell>{client.id}</TableCell>
-            //                    <TableCell>{client.name}</TableCell>
-            //                    <TableCell>{client.email}</TableCell>
-            //                    <TableCell>{client.phone}</TableCell>
-            //                    <TableCell>{client.address}</TableCell>
-            //                    <TableCell>{client.city}</TableCell>
-            //                    <TableCell>{client.country}</TableCell>
-            //                    <TableCell>{client.contact}</TableCell>                   
-                                
-            //                    <TableCell>
-            //                        <Button variant="outlined" color="primary" onClick={() => handleEdit(client.id)}>Editar</Button>
-            //                    </TableCell>
-            //                    <TableCell>
-            //                        <Button variant="outlined" color="error" onClick={() => handleDelete(client.id)}>Eliminar</Button>
-            //                    </TableCell>
-            //                </TableRow>
-            //            ))}
-            //        </TableBody>
-            //    </Table>
-            //</TableContainer>
+            

@@ -35,7 +35,7 @@ namespace ProyectoCore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u => u.Role).ToListAsync();
         }
 
         // GET: api/Users/5
@@ -50,6 +50,12 @@ namespace ProyectoCore.Controllers
             }
 
             return user;
+        }
+
+        [HttpPost("getRoles")]
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
+        {
+            return await _context.Roles.ToListAsync();
         }
 
         [HttpGet("{id}/asignedTasks")]
@@ -96,6 +102,16 @@ namespace ProyectoCore.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);
+            //add notification to welcome user
+            Notification notification = new Notification
+            {
+                Title = "Welcome",
+                Message = "Welcome to the system",
+                Url = "http://localhost:3000/profile",
+                UserId = user.Id,
+                Date = DateTime.Now
+            };
+            _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);

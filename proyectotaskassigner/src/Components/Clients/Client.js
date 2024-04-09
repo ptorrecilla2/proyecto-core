@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate,useParams } from 'react-router-dom';
 import { getAuthToken } from '../../Services/AuthService';
-//import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
+
 
 const Client = () => { 
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Client = () => {
     const { id } = useParams();
     const authToken = getAuthToken();
     const [isEdit, setIsEdit] = useState(false); 
-    const [showModal, setShowModal] = useState(false);
+    
 
     useEffect(() => {
         if (!authToken) {
@@ -112,20 +112,18 @@ const Client = () => {
     return (
         <>
             <div className="container mt-5 text-center">
-                <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>
-                    {id === 'create' ? 'Crear Cliente' : 'Editar Cliente'}
-                </button>
-                <button className="btn btn-danger" onClick={() => navigate('/clientes')}>Cancelar</button>
-                {showModal && (
-                    <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                <h5 className="modal-title">{id === 'create' ? 'Crear Cliente' : 'Editar Cliente'}</h5>
-                                    <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
-                                </div>
-                                <div className="modal-body">
-                                    <form onSubmit={handleSubmit}>
+                <div className="text-center">
+                    <h1 className="text-primary">{id === 'create' ? 'Crear Cliente' : 'Editar Cliente'}</h1>
+                    <hr className="text-primary" />
+                </div>
+                <div className="row justify-content-center mt-5">
+                    <div className="col-md-6">
+                        <div className="card mb-5">
+                            <div className="card-header">
+                                <h5 className="card-title">{id === 'create' ? 'Crear Cliente' : 'Editar Cliente'}</h5>
+                            </div>
+                            <div className="card-body">
+                                <form onSubmit={handleSubmit}>
                                         <div className="mb-3">
                                             <label htmlFor="clientName" className="form-label">Nombre del Cliente</label>
                                             <input type="text" className="form-control" id="clientName" name="name" value={client.name} onChange={handleChange} />
@@ -163,70 +161,11 @@ const Client = () => {
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>    
-                ) }
+                    </div>
+                </div>
             </div>
         </>
     );
 };
 
 export default Client;
-
-
-//<form onSubmit={handleSubmit}>
-//    <Typography variant="h5">{id === 'create' ? 'Crear Cliente' : 'Editar Cliente'}</Typography>
-//    <TextField
-//        fullWidth
-//        label="Nombre del Cliente"
-//        name="name"
-//        value={client.name}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Email del Cliente"
-//        name="email"
-//        value={client.email}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Telefono del Cliente"
-//        name="phone"
-//        value={client.phone}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Direccion del Cliente"
-//        name="address"
-//        value={client.address}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Ciudad del Cliente"
-//        name="city"
-//        value={client.city}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Pais del Cliente"
-//        name="country"
-//        value={client.country}
-//        onChange={handleChange}
-//    />
-//    <TextField
-//        fullWidth
-//        label="Contacto del Cliente"
-//        name="contact"
-//        value={client.contact}
-//        onChange={handleChange}
-//    />
-//    <Button type="submit" variant="contained" color="primary">
-//        {id === 'create' ? 'Crear' : 'Guardar Cambios'}
-//    </Button>
-//    <Button variant="outlined" color="primary" onClick={() => navigate('/clientes')}>Cancelar</Button>
-//</form>

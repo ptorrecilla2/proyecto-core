@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoCore.Data;
 
@@ -11,9 +12,11 @@ using ProyectoCore.Data;
 namespace ProyectoCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240409104330_m6")]
+    partial class m6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +126,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3944),
+                            Date = new DateTime(2024, 4, 9, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2465),
                             Description = "Comentario de prueba 1",
                             TaskId = 1,
                             UserId = 1
@@ -131,7 +134,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3947),
+                            Date = new DateTime(2024, 4, 9, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2468),
                             Description = "Comentario de prueba 2",
                             TaskId = 2,
                             UserId = 2
@@ -145,9 +148,6 @@ namespace ProyectoCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -172,6 +172,26 @@ namespace ProyectoCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Notification", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Message = "Mensaje de notificación 1",
+                            Read = false,
+                            Title = "Notificación 1",
+                            Url = "https://www.google.com",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Message = "Mensaje de notificación 2",
+                            Read = false,
+                            Title = "Notificación 2",
+                            Url = "https://www.google.com",
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("ProyectoCore.Models.Project", b =>
@@ -251,8 +271,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            FinalDate = new DateTime(2024, 4, 16, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3858),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3801),
+                            FinalDate = new DateTime(2024, 4, 16, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2426),
+                            InitialDate = new DateTime(2024, 4, 9, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2373),
                             Name = "Task1",
                             Priority = 2,
                             ProjectId = 1,
@@ -261,8 +281,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            FinalDate = new DateTime(2024, 4, 14, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3865),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3863),
+                            FinalDate = new DateTime(2024, 4, 14, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2434),
+                            InitialDate = new DateTime(2024, 4, 9, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2433),
                             Name = "Task2",
                             Priority = 1,
                             ProjectId = 2,
@@ -271,8 +291,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 3,
-                            FinalDate = new DateTime(2024, 4, 12, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3919),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3917),
+                            FinalDate = new DateTime(2024, 4, 12, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2438),
+                            InitialDate = new DateTime(2024, 4, 9, 12, 43, 29, 560, DateTimeKind.Local).AddTicks(2436),
                             Name = "Task3",
                             Priority = 0,
                             ProjectId = 3,

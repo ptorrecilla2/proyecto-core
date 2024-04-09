@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getAuthToken } from '../../Services/AuthService';
-//import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+
 
 
 
@@ -78,8 +78,10 @@ const Projects = () => {
     return (
         <>
             <div className="container mt-5">
-                <h1 className="text-center text-primary display-4">Proyectos de Task Allocator</h1>
-                <hr className="text-primary" />
+                <div>
+                    <h1 className="text-center text-primary display-4">Proyectos</h1>
+                    <hr className="text-primary" />
+                </div>
 
                 <div className="text-start">
                     <button className="btn btn-success mt-3 mb-5" onClick={() => navigate('/proyectos/create')}>
@@ -143,39 +145,5 @@ const Projects = () => {
         </>
     );
 };
-
-
-
-            //    <Button variant="outlined" color="primary" onClick={() => navigate('/proyectos/create') }> Crear Proyecto </Button>
-            //<TableContainer component={Paper}>
-            //    <Table>
-            //        <TableHead>
-            //            <TableRow>
-            //                <TableCell>ID</TableCell>
-            //                <TableCell>Nombre del Proyecto</TableCell>
-            //                <TableCell>Nombre del Cliente</TableCell>
-            //            </TableRow>
-            //        </TableHead>
-            //        <TableBody>
-            //            {projects.map((project) => (
-            //                <TableRow key={project.id}>
-            //                    <TableCell>{project.id}</TableCell>
-            //                    <TableCell>{project.name}</TableCell>
-            //                    <TableCell>{project.client.name}</TableCell>
-            //                    <TableCell>
-            //                        <Button variant="outlined" color="primary" onClick={() => navigate(`/proyectos/${project.id}/tareas`)}>Ver Tareas</Button>
-            //                        </TableCell>
-            //                    <TableCell>
-            //                        <Button variant="outlined" color="primary" onClick={() => handleEdit(project.id)}>Editar</Button>
-            //                    </TableCell>
-            //                    <TableCell>
-            //                        <Button variant="outlined" color="error" onClick={() => handleDelete(project.id)}>Eliminar</Button>
-            //                    </TableCell>
-            //                </TableRow>
-            //            ))}
-            //        </TableBody>
-            //    </Table>
-            //</TableContainer>
-   
 
 export default Projects;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoCore.Data;
 
@@ -11,9 +12,11 @@ using ProyectoCore.Data;
 namespace ProyectoCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240409094158_m5")]
+    partial class m5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,7 +126,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3944),
+                            Date = new DateTime(2024, 4, 9, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9945),
                             Description = "Comentario de prueba 1",
                             TaskId = 1,
                             UserId = 1
@@ -131,7 +134,7 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3947),
+                            Date = new DateTime(2024, 4, 9, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9950),
                             Description = "Comentario de prueba 2",
                             TaskId = 2,
                             UserId = 2
@@ -145,9 +148,6 @@ namespace ProyectoCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -251,8 +251,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            FinalDate = new DateTime(2024, 4, 16, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3858),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3801),
+                            FinalDate = new DateTime(2024, 4, 16, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9890),
+                            InitialDate = new DateTime(2024, 4, 9, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9832),
                             Name = "Task1",
                             Priority = 2,
                             ProjectId = 1,
@@ -261,8 +261,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            FinalDate = new DateTime(2024, 4, 14, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3865),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3863),
+                            FinalDate = new DateTime(2024, 4, 14, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9904),
+                            InitialDate = new DateTime(2024, 4, 9, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9901),
                             Name = "Task2",
                             Priority = 1,
                             ProjectId = 2,
@@ -271,8 +271,8 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 3,
-                            FinalDate = new DateTime(2024, 4, 12, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3919),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3917),
+                            FinalDate = new DateTime(2024, 4, 12, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9908),
+                            InitialDate = new DateTime(2024, 4, 9, 11, 41, 56, 237, DateTimeKind.Local).AddTicks(9907),
                             Name = "Task3",
                             Priority = 0,
                             ProjectId = 3,

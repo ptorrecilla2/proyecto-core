@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj": {}
+    "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj": {}
   },
   "projects": {
-    "D:\\Project\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj": {
+    "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj",
+        "projectUniqueName": "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj",
         "projectName": "ProyectoCore",
-        "projectPath": "D:\\Project\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj",
-        "packagesPath": "C:\\Users\\Gigabyte\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\proyecto-core\\ProyectoCore\\obj\\",
+        "projectPath": "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\ProyectoCore.csproj",
+        "packagesPath": "C:\\Users\\1988p\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Gigabyte\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\1988p\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

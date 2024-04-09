@@ -34,6 +34,7 @@ const TaskListAsigned = () => {
         console.error('Error al obtener la informaci�n del usuario');
         })
     }, []);
+
     return <TaskList tasks={tasks}></TaskList>;
 }
 

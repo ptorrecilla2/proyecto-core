@@ -9,8 +9,7 @@ const Project = () => {
     const [clients, setClients] = useState([]);
     const { id } = useParams();
     const [isEdit, setIsEdit] = useState(false);
-    const authToken = getAuthToken();
-    const [showModal, setShowModal] = useState(false);
+    const authToken = getAuthToken();    
     const [errors, setErrors] = useState({ name: '', clientId: '' }); 
 
     useEffect(() => {
@@ -104,21 +103,21 @@ const Project = () => {
 
     return (
         <>
+            
             <div className="container mt-5 text-center">
-                <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>
-                    {id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}
-                </button>
-                <button className="btn btn-danger" onClick={() => navigate('/proyectos')}>Cancelar</button>
-                {showModal && (
-                    <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</h5>
-                                    <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
-                                </div>
-                                <div className="modal-body">
-                                    <form onSubmit={handleSubmit}>
+                <div className="text-center">
+                    <h1 className="text-primary">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</h1>
+                    <hr className="text-primary" />
+                </div>
+
+                <div className="row justify-content-center mt-5">
+                    <div className="col-md-6">
+                        <div className="card mb-5">
+                            <div className="card-header">
+                                <h5 className="card-title">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</h5>
+                            </div>
+                            <div className="card-body">
+                                <form onSubmit={handleSubmit}>
                                         <div className="mb-3">
                                             <label htmlFor="projectName" className="form-label">Nombre del Proyecto</label>
                                             <input type="text" className="form-control" id="projectName" name="name" value={project.name} onChange={handleChange} />
@@ -139,46 +138,14 @@ const Project = () => {
                                             </button>
                                             <button type="button" className="btn btn-outline-primary me-2" onClick={() => navigate('/proyectos')}>Cancelar</button>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
+                                </form>
+                            </div>               
                         </div>
                     </div>
-                )}
+                </div>
             </div>
         </>
     );
 };
 
 export default Project;
-
-
-
-
-
-//<form onSubmit={handleSubmit}>
-//    <Typography variant="h5">{id === 'create' ? 'Crear Proyecto' : 'Editar Proyecto'}</Typography>
-//    <TextField
-//        fullWidth
-//        label="Nombre del Proyecto"
-//        name="name"
-//        value={project.name}
-//        onChange={handleChange}
-//    />
-//    <FormControl fullWidth>
-//        <InputLabel>Seleccionar Cliente</InputLabel>
-//        <Select
-//            name="clientId"
-//            value={project.clientId}
-//            onChange={handleChange}
-//        >
-//            {clients.map(client => (
-//                <MenuItem key={client.id} value={client.id}>{client.name}</MenuItem>
-//            ))}
-//        </Select>
-//    </FormControl>
-//    <Button variant="outlined" color="primary" onClick={() => navigate('/proyectos')}>Cancelar</Button>
-//    <Button type="submit" variant="contained" color="primary" style={{ marginTop: '1rem' }}>
-//        {id === 'create' ? 'Crear' : 'Guardar Cambios'}
-//    </Button>
-//</form>
