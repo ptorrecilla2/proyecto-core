@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProyectoCore.Data;
+using ProyectoCore.NewFolder1;
 using System.Text;
 
 
@@ -14,9 +15,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(
                name:"MyPolicy",
-               builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+               builder => builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 });
 
+builder.Services.AddSignalR();
 builder.Services.AddControllers();
 //Añadimos la cadena de conexion
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -58,5 +60,7 @@ app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<NotificationHub>("/notificationHub");
+
 
 app.Run();

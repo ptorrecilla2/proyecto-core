@@ -34,7 +34,22 @@ const TaskListAsigned = () => {
         })
     }, []);
 
-    return <TaskList tasks={tasks}></TaskList>;
+    const handleDelete = (id) => {
+        axios.delete(`https://localhost:7153/api/ProjectTasks/${id}`)
+        .then((response) => {
+            //actualizar la lista de tareas eliminando la tarea con el id proporcionado sin usar estados
+            setTasks(tasks.filter(task => task.id !== id));
+    
+    
+            
+        })
+        .catch((error) => {
+            console.error(`Error al eliminar el usuario con ID: ${id}`);
+        });
+        console.log(`Delete task with ID: ${id}`);
+    };
+
+    return <TaskList tasks={tasks} handleDelete={handleDelete}></TaskList>;
 }
 
 export default TaskListAsigned;

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { logout, getAuthToken, getRole } from '../Services/AuthService';
+import { logout, getAuthToken } from '../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import Notification from './Notification';
 const NavBar = () => {
 
-    const role = getRole();
     const [user, setUser] = useState({});
     const navigate = useNavigate();
     useEffect(() => {
         const authToken = getAuthToken();
-            if (!authToken || !role) {
+            if (!authToken) {
                 //Navegar a Login
                 navigate('/login');             
             }
@@ -66,7 +65,7 @@ const NavBar = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
-                            {role === 'Admin' ? (
+                            {user.role?.type === 'Admin' ? (
                                 <>
                             <li className="nav-item">
                                 <a className="nav-link active" aria-current="page" href="/proyectos">Proyectos</a>

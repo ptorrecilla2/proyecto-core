@@ -327,6 +327,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ProyectoCore.Controllers.NotificationsController",
+    "Method": "PutNotifications",
+    "RelativePath": "api/Notifications/batchUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notifications",
+        "Type": "System.Collections.Generic.List\u00601[[ProyectoCore.Models.Notification, ProyectoCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ProyectoCore.Controllers.ProjectsController",
     "Method": "GetProjects",
     "RelativePath": "api/Projects",

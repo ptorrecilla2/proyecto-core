@@ -69,20 +69,25 @@ useEffect(() => {
         setnewTask({ ...newTask, finalDate: event.target.value });
     };
 
-    const handleTaskSave = async () => {
-        try {
-          await axios.post(
-            `https://localhost:7153/api/ProjectTasks/saveTask?idDev=${newTask.dev.id}&idManager=${newTask.manager.id}`,
-            newTask,
-            { headers }
-            );
-            console.log("Enviado");
-          setnewTask({ });
-          navigate("/tareas/");
-        } catch (error) {
-          console.error("Error saving task:", error);
-        }
-      };
+    const handleTaskSave = async (e) => {
+            e.preventDefault();
+            // Create a new object instead of mutating the original one
+            const taskToSave = {
+                ...newTask,
+                initialDate: new Date(newTask.initialDate),
+                finalDate: new Date(newTask.finalDate)
+            };
+    
+            axios.post(
+                `https://localhost:7153/api/ProjectTasks/saveTask?idDev=${newTask.dev.id}&idManager=${newTask.manager.id}`,
+                taskToSave,
+                { headers }
+            ).then((response) => navigate("/tareas")).catch((error) => {
+                console.log("Failed to save task. Server returned status: ", error);
+            });
+
+        
+    };
     return (
         <div className="container mt-5">
             <div className="text-center">
@@ -114,6 +119,7 @@ useEffect(() => {
                                 <div className="mb-3">
                                     <label htmlFor="project" className="form-label">Proyecto</label>
                                     <select className="form-select" id="project" name="project" value={newTask.project.id} onChange={handleProjectChange}>
+                                        <option value="">Seleccione un proyecto</option>
                                         {projects.map((projectKey) => (
                                             <option key={projectKey.id} value={projectKey.id}>{projectKey.name}</option>
                                         ))}
@@ -122,6 +128,7 @@ useEffect(() => {
                                 <div className="mb-3">
                                     <label htmlFor="priority" className="form-label">Prioridad</label>
                                     <select className="form-select" name="priority" id="priority" value={newTask.priority} onChange={handlePriorityChange}>
+                                        <option value="">Seleccione una prioridad</option>
                                         {Object.keys(priorityOptions).map((priorityKey) => (
                                             <option key={priorityKey} value={priorityKey}>{priorityKey}</option>
                                         ))}
@@ -130,6 +137,7 @@ useEffect(() => {
                                 <div className="mb-3">
                                     <label htmlFor="status" className="form-label">Estado</label>
                                     <select className="form-select" id="status" name="status" value={newTask.status} onChange={handleStatusChange}>
+                                        <option value="">Seleccione un estado</option>
                                         {Object.keys(statusOptions).map((statusKey) => (
                                             <option key={statusKey} value={statusKey}>{statusKey}</option>
                                         ))}
@@ -138,6 +146,7 @@ useEffect(() => {
                                 <div className="mb-3">
                                     <label htmlFor="dev" className="form-label">Desarrollador</label>
                                     <select className="form-select" id="dev" name="dev" value={newTask.dev.id} onChange={handleDevChange}>
+                                        <option value="">Seleccione un desarrollador</option>
                                         {participants.map((user) => (
                                             <option key={user.id} value={user.id}>{user.name}</option>
                                         ))}
@@ -146,6 +155,7 @@ useEffect(() => {
                                 <div className="mb-3">
                                     <label htmlFor="manager" className="form-label">Manager</label>
                                     <select className="form-select" name="manager" id="manager" value={newTask.manager.id} onChange={handleManagerChange}>
+                                        <option value="">Seleccione un manager</option>
                                         {participants.map((user) => (
                                             <option key={user.id} value={user.id}>{user.name}</option>
                                         ))}

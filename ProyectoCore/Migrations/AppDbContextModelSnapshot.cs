@@ -59,35 +59,57 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            Address = "Calle Alta, 1",
-                            City = "Madrid",
-                            Contact = "empresauno@gmail.com",
-                            Country = "España",
-                            Email = "empresauno@gmail.com",
-                            Name = "EmpresaUno",
-                            Phone = "123456789"
+                            Address = "123 Main St",
+                            City = "Anytown",
+                            Contact = "John Smith",
+                            Country = "USA",
+                            Email = "info@techsolutions.com",
+                            Name = "Tech Solutions Inc.",
+                            Phone = "12345678"
                         },
                         new
                         {
                             Id = 2,
-                            Address = "Calle Baja, 2",
-                            City = "Barcelona",
-                            Contact = "empresados@gmail.com",
-                            Country = "España",
-                            Email = "empresados@gmail.com",
-                            Name = "EmpresaDos",
-                            Phone = "987654321"
+                            Address = "456 Elm St",
+                            City = "Sometown",
+                            Contact = "Alice Johnson",
+                            Country = "UK",
+                            Email = "info@globalinnovations.com",
+                            Name = "Global Innovations Ltd.",
+                            Phone = "87654321"
                         },
                         new
                         {
                             Id = 3,
-                            Address = "Calle Media, 3",
-                            City = "Valencia",
-                            Contact = "empresatres@gmail.com",
-                            Country = "España",
-                            Email = "empresatres@gmail.com",
-                            Name = "EmpresaTres",
-                            Phone = "123456789"
+                            Address = "789 Oak St",
+                            City = "Othertown",
+                            Contact = "Mohammed Khan",
+                            Country = "Canada",
+                            Email = "info@datasystems.com",
+                            Name = "Data Systems Corp.",
+                            Phone = "44556677"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "321 Cedar St",
+                            City = "Smalltown",
+                            Contact = "Maria Garcia",
+                            Country = "Spain",
+                            Email = "info@acme.com",
+                            Name = "Acme Enterprises",
+                            Phone = "33224466"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "987 Pine St",
+                            City = "Metrocity",
+                            Contact = "Chen Wei",
+                            Country = "China",
+                            Email = "info@sunrise.com",
+                            Name = "Sunrise Technologies",
+                            Phone = "86123456789"
                         });
                 });
 
@@ -123,18 +145,42 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3944),
-                            Description = "Comentario de prueba 1",
+                            Date = new DateTime(2024, 4, 14, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9224),
+                            Description = "Great progress on the wireframes!",
                             TaskId = 1,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3947),
-                            Description = "Comentario de prueba 2",
+                            Date = new DateTime(2024, 4, 14, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9228),
+                            Description = "We need to finalize the backend architecture ASAP.",
                             TaskId = 2,
                             UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2024, 4, 12, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9230),
+                            Description = "Data collection going smoothly.",
+                            TaskId = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2024, 4, 11, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9232),
+                            Description = "UI/UX enhancements completed successfully.",
+                            TaskId = 4,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateTime(2024, 4, 14, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9235),
+                            Description = "Testing phase started.",
+                            TaskId = 5,
+                            UserId = 5
                         });
                 });
 
@@ -199,19 +245,31 @@ namespace ProyectoCore.Migrations
                         {
                             Id = 1,
                             ClientId = 1,
-                            Name = "Project1"
+                            Name = "Website Redesign"
                         },
                         new
                         {
                             Id = 2,
                             ClientId = 2,
-                            Name = "Project2"
+                            Name = "Product Development"
                         },
                         new
                         {
                             Id = 3,
                             ClientId = 3,
-                            Name = "Project3"
+                            Name = "Data Analytics Platform"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClientId = 4,
+                            Name = "E-commerce Integration"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClientId = 5,
+                            Name = "Mobile App Development"
                         });
                 });
 
@@ -251,32 +309,52 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 1,
-                            FinalDate = new DateTime(2024, 4, 16, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3858),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3801),
-                            Name = "Task1",
-                            Priority = 2,
-                            ProjectId = 1,
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FinalDate = new DateTime(2024, 4, 14, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3865),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3863),
-                            Name = "Task2",
+                            FinalDate = new DateTime(2024, 4, 22, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9181),
+                            InitialDate = new DateTime(2024, 4, 15, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9130),
+                            Name = "Design Wireframes",
                             Priority = 1,
-                            ProjectId = 2,
+                            ProjectId = 1,
                             Status = 1
                         },
                         new
                         {
+                            Id = 2,
+                            FinalDate = new DateTime(2024, 4, 29, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9189),
+                            InitialDate = new DateTime(2024, 4, 15, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9187),
+                            Name = "Backend Development",
+                            Priority = 2,
+                            ProjectId = 2,
+                            Status = 0
+                        },
+                        new
+                        {
                             Id = 3,
-                            FinalDate = new DateTime(2024, 4, 12, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3919),
-                            InitialDate = new DateTime(2024, 4, 9, 12, 48, 13, 577, DateTimeKind.Local).AddTicks(3917),
-                            Name = "Task3",
+                            FinalDate = new DateTime(2024, 4, 25, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9193),
+                            InitialDate = new DateTime(2024, 4, 15, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9191),
+                            Name = "Data Collection",
                             Priority = 0,
                             ProjectId = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FinalDate = new DateTime(2024, 4, 20, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9197),
+                            InitialDate = new DateTime(2024, 4, 15, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9195),
+                            Name = "UI/UX Enhancement",
+                            Priority = 1,
+                            ProjectId = 4,
                             Status = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FinalDate = new DateTime(2024, 4, 22, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9200),
+                            InitialDate = new DateTime(2024, 4, 15, 17, 3, 59, 754, DateTimeKind.Local).AddTicks(9199),
+                            Name = "Testing & Deployment",
+                            Priority = 2,
+                            ProjectId = 5,
+                            Status = 0
                         });
                 });
 
@@ -360,29 +438,29 @@ namespace ProyectoCore.Migrations
                         new
                         {
                             Id = 2,
-                            Email = "juan@gmail.com",
-                            LastName = "García",
-                            Name = "Juan",
+                            Email = "javier@gmail.com",
+                            LastName = "Vázquez",
+                            Name = "Javier",
                             Password = "123456",
-                            RoleId = 2
+                            RoleId = 1
                         },
                         new
                         {
                             Id = 3,
-                            Email = "ana@gmail.com",
-                            LastName = "González",
-                            Name = "Ana",
+                            Email = "camilo@gmail.com",
+                            LastName = "Rodríguez",
+                            Name = "Camilo",
                             Password = "123456",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Email = "maria@gmail.com",
-                            LastName = "Rodríguez",
-                            Name = "María",
+                            Email = "pablo@gmail.com",
+                            LastName = "Torrecilla",
+                            Name = "Pablo",
                             Password = "123456",
-                            RoleId = 4
+                            RoleId = 2
                         },
                         new
                         {
@@ -392,6 +470,42 @@ namespace ProyectoCore.Migrations
                             Name = "Sara",
                             Password = "123456",
                             RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Email = "maria@gmail.com",
+                            LastName = "García",
+                            Name = "María",
+                            Password = "123456",
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Email = "carlos@gmail.com",
+                            LastName = "Gómez",
+                            Name = "Carlos",
+                            Password = "123456",
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Email = "ana@gmail.com",
+                            LastName = "Martínez",
+                            Name = "Ana",
+                            Password = "123456",
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Email = "lucia@gmail.com",
+                            LastName = "Sánchez",
+                            Name = "Lucía",
+                            Password = "123456",
+                            RoleId = 4
                         });
                 });
 
@@ -425,29 +539,71 @@ namespace ProyectoCore.Migrations
                         {
                             Id = 1,
                             TaskId = 1,
-                            TaskRole = "Dev",
-                            UserId = 2
+                            TaskRole = "UI/UX Designer",
+                            UserId = 4
                         },
                         new
                         {
                             Id = 2,
-                            TaskId = 1,
-                            TaskRole = "Manager",
-                            UserId = 3
+                            TaskId = 2,
+                            TaskRole = "Backend Developer",
+                            UserId = 5
                         },
                         new
                         {
                             Id = 3,
-                            TaskId = 2,
-                            TaskRole = "Dev",
-                            UserId = 2
+                            TaskId = 3,
+                            TaskRole = "Data Analyst",
+                            UserId = 6
                         },
                         new
                         {
                             Id = 4,
-                            TaskId = 2,
-                            TaskRole = "Tester",
+                            TaskId = 4,
+                            TaskRole = "UI/UX Designer",
                             UserId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TaskId = 5,
+                            TaskRole = "QA Engineer",
+                            UserId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            TaskId = 1,
+                            TaskRole = "Frontend Developer",
+                            UserId = 7
+                        },
+                        new
+                        {
+                            Id = 7,
+                            TaskId = 2,
+                            TaskRole = "Project Manager",
+                            UserId = 8
+                        },
+                        new
+                        {
+                            Id = 8,
+                            TaskId = 3,
+                            TaskRole = "Data Scientist",
+                            UserId = 9
+                        },
+                        new
+                        {
+                            Id = 9,
+                            TaskId = 4,
+                            TaskRole = "Graphic Designer",
+                            UserId = 7
+                        },
+                        new
+                        {
+                            Id = 10,
+                            TaskId = 5,
+                            TaskRole = "Mobile App Developer",
+                            UserId = 8
                         });
                 });
 

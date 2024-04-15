@@ -103,17 +103,21 @@ namespace ProyectoCore.Controllers
         {
             _context.Users.Add(user);
             //add notification to welcome user
+            
+            await _context.SaveChangesAsync();
+
+
+
             Notification notification = new Notification
             {
-                Title = "Welcome",
-                Message = "Welcome to the system",
+                Title = "Bienvenido",
+                Message = "Bienvenido al sistema "+user.Name,
                 Url = "http://localhost:3000/profile",
                 UserId = user.Id,
                 Date = DateTime.Now
             };
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
@@ -146,7 +150,7 @@ namespace ProyectoCore.Controllers
             if (IsValidUser(model.Email, model.Password))
             {
                 var user = _context.Users.Include(u=>u.Role).FirstOrDefault(u => u.Email == model.Email);
-                var token = GenerateJwtToken(model.Email);
+                var token = GenerateJwtToken(model.Email, user.Id, user.Name, user.Role);
                 return Ok(new { Token = token,Role = user.Role });
             }
 
@@ -159,12 +163,13 @@ namespace ProyectoCore.Controllers
             // Accede a la información del usuario desde el contexto de la solicitud
             var userEmail2 = User.FindFirst("email")?.Value;
             var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+
             if (string.IsNullOrEmpty(userEmail))
             {
                 return BadRequest("User email claim not found.");
             }
             //obtener información del usuario
-            var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
+            var user = _context.Users.Include(u=>u.Role).FirstOrDefault(u => u.Email == userEmail);
             if (user == null)
             {
                 return NotFound();
@@ -174,7 +179,7 @@ namespace ProyectoCore.Controllers
             return Ok(new { user });
         }
 
-        private string GenerateJwtToken(string email)
+        private string GenerateJwtToken(string email, int id, string name, Role role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
@@ -183,6 +188,9 @@ namespace ProyectoCore.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Name, name),
+                    new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                    new Claim(ClaimTypes.Role, role.Type.ToString())
                     // Add additional claims as needed
                 }),
                 Expires = DateTime.UtcNow.AddHours(1), // Token expiration time

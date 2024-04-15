@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getRole } from '../../Services/AuthService';
+import { getDecodedToken } from '../../Services/AuthService';
+import axios from 'axios';
 
-function TaskList({ tasks }) {
-  const role = getRole();
+function TaskList({ tasks , handleDelete}) {
   const navigate = useNavigate();
+  
 
   const groupTasksByStatus = () => {
     const groupedTasks = {};
@@ -16,6 +17,8 @@ function TaskList({ tasks }) {
     });
     return groupedTasks;
   };
+
+  
 
   const renderTasksByStatus = () => {
     const groupedTasks = groupTasksByStatus();
@@ -48,10 +51,15 @@ function TaskList({ tasks }) {
                             {groupedTasks[status].map(task => (
                                 <div key={task.id} className="d-flex justify-content-between align-items-center mb-3">
                                     <h5>{task.name}</h5>
-                                    <button className="btn btn-outline-success btn" onClick={() => navigate('/tareas/' + task.id)}><i className="bi bi-eye"> Ver</i></button>
+                                    <div>
+
+                                    <button className="btn btn-outline-success btn mx-2" onClick={() => navigate('/tareas/' + task.id)}><i className="bi bi-eye"> Ver</i></button>
+                                    <button className="btn btn-outline-danger btn" onClick={() => handleDelete(task.id)}><i className="bi bi-trash"> Eliminar</i></button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -67,7 +75,7 @@ function TaskList({ tasks }) {
                 <hr className="text-primary" />
             </div>
             <div className="mt-4">
-                {role === 'Admin' && (
+                {getDecodedToken().role === 'Admin' && (
                     <button className="btn btn-success mb-3" onClick={() => navigate('/tareas/create')}>
                         <i className="bi bi-file-earmark-plus"> Crear Tarea</i> 
                     </button>

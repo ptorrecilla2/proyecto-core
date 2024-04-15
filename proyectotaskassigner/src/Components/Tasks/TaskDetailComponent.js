@@ -67,7 +67,7 @@ const TaskDetailsComponent = () => {
         { headers }
       );
       setTask(responseTask.data.projectTask);
-      setParticipants(responseTask.data.participants.map((p) => ({name:p.user.name + ' ' +p.user.lastName, role:p.taskRole})));
+      setParticipants(responseTask.data.participants.map((p) => ({name:p.user.name + ' ' +p.user.lastName, role:p.user.role.type})));
       setStatusOptions(responseTask.data.statusDictionary);
       setPriorityOptions(responseTask.data.priorityDictionary);
       setPriority(responseTask.data.projectTask.priority);
@@ -141,7 +141,7 @@ const TaskDetailsComponent = () => {
 
   const handleTaskEdit = () => {
     setIsEditingTask(true);
-    setEditedTask({ ...task });
+    setEditedTask({ ...task , initialDate: task.initialDate.substring(0, task.initialDate.indexOf("T")), finalDate: task.finalDate.substring(0, task.finalDate.indexOf("T") )});
   };
 
   const handleTaskCancel = () => {
@@ -167,7 +167,7 @@ const TaskDetailsComponent = () => {
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   };
 
-
+  
   const showComment = (comment) => {
     if (editingCommentId === comment.id) {
       return (
@@ -291,9 +291,9 @@ const TaskDetailsComponent = () => {
                                   <TextField
                                       label="Fecha de Creacion"
                                       type="date"
-                                      value={editedTask.initialDate}
+                                      value={ editedTask.initialDate}
                                       onChange={handleInitialDateChange}
-
+                                      
                                       fullWidth
                                       margin="normal"
                                   />
@@ -380,7 +380,7 @@ const TaskDetailsComponent = () => {
                      )}
                       <Grid item xs={12}>
                         <Paper elevation={3} style={{ padding: 20 }}>
-                            <Typography variant="h5" style className="mb-3" style={{ color: '#2980B9' }}>Comentarios</Typography>
+                            <Typography variant="h5"  className="mb-3" style={{ color: '#2980B9' }}>Comentarios</Typography>
                               <TextField
                                   label="Add Comment"
                                   variant="outlined"

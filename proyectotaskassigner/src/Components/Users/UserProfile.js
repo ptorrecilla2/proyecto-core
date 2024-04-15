@@ -2,12 +2,11 @@ import React, { useEffect,useState } from 'react';
 
 import axios from 'axios';
 
-import { logout, getAuthToken , getRole} from '../../Services/AuthService';
+import { logout, getAuthToken } from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom'; 
 
 
 const NavBar = () => {
-    const role = getRole();
     const [user, setUser] = useState({});
     const navigate = useNavigate();
     useEffect(() => {

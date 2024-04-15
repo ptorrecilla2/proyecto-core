@@ -21,7 +21,7 @@ const AppRoutes = () => {
         <Router>
             
             <Routes>
-                <Route exact path="/" element={<Navigate to='/profile' />} />
+                <Route exact path="/" element={<Navigate to='/login' />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Login />} />
                 <Route path="/profile" element={<><NavBar/><UserProfile /></>} />

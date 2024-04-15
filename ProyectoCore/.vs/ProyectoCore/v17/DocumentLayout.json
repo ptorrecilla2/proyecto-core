@@ -1,7 +1,56 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\1988p\\Desktop\\proyecto-core\\ProyectoCore\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\controllers\\projecttaskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:controllers\\projecttaskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150400_M1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20240415150400_M1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150255_M8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20240415150255_M8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\models\\modelbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:models\\modelbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\models\\projecttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:models\\projecttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\newfolder1\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:newfolder1\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|d:\\proyecto-core-ultimo\\proyecto-core\\proyectocore\\proyectocore.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{84182902-5B1A-4AEF-B3A5-EBC72AC06DF1}|ProyectoCore.csproj|solutionrelative:proyectocore.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,23 +58,158 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20240415150400_M1.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150400_M1.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240415150400_M1.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150400_M1.cs",
+              "RelativeToolTip": "Migrations\\20240415150400_M1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T15:04:00.537Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20240415150255_M8.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150255_M8.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240415150255_M8.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Migrations\\20240415150255_M8.cs",
+              "RelativeToolTip": "Migrations\\20240415150255_M8.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T15:02:55.67Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ModelBuilderExtensions.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Models\\ModelBuilderExtensions.cs",
+              "RelativeDocumentMoniker": "Models\\ModelBuilderExtensions.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Models\\ModelBuilderExtensions.cs",
+              "RelativeToolTip": "Models\\ModelBuilderExtensions.cs",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAswFgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T15:02:08.528Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-13T13:05:55.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NotificationHub.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\NewFolder1\\NotificationHub.cs",
+              "RelativeDocumentMoniker": "NewFolder1\\NotificationHub.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\NewFolder1\\NotificationHub.cs",
+              "RelativeToolTip": "NewFolder1\\NotificationHub.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T18:03:41.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T10:06:58.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProyectoCore.http",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\ProyectoCore.http",
+              "RelativeDocumentMoniker": "ProyectoCore.http",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\ProyectoCore.http",
+              "RelativeToolTip": "ProyectoCore.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-04-10T10:06:57.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NotificationsController.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\NotificationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NotificationsController.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\NotificationsController.cs",
+              "RelativeToolTip": "Controllers\\NotificationsController.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAowEwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T15:45:58.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAuwBgAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T15:44:33.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProjectTask.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Models\\ProjectTask.cs",
+              "RelativeDocumentMoniker": "Models\\ProjectTask.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Models\\ProjectTask.cs",
+              "RelativeToolTip": "Models\\ProjectTask.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAuwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T15:41:02.223Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProjectTasksController.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\ProjectTasksController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProjectTasksController.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\ProjectTasksController.cs",
+              "RelativeToolTip": "Controllers\\ProjectTasksController.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAkwGcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T15:40:59.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommentsController.cs",
+              "DocumentMoniker": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\CommentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CommentsController.cs",
+              "ToolTip": "D:\\proyecto-core-ultimo\\proyecto-core\\ProyectoCore\\Controllers\\CommentsController.cs",
+              "RelativeToolTip": "Controllers\\CommentsController.cs",
+              "ViewState": "AQIAAH0AAAAAAAAAAAAAwIAAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T15:39:01.723Z",
+              "EditorCaption": ""
             }
           ]
         }

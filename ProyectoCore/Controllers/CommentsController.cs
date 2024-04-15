@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using ProyectoCore.Data;
 using ProyectoCore.Models;
+using ProyectoCore.NewFolder1;
 
 namespace ProyectoCore.Controllers
 {
@@ -15,12 +17,13 @@ namespace ProyectoCore.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
 
-        public CommentsController(AppDbContext context)
+        public CommentsController(AppDbContext context, IHubContext<NotificationHub> notificationHubContext)
         {
             _context = context;
+            _notificationHubContext = notificationHubContext;
         }
-
         // GET: api/Comments
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
@@ -56,18 +59,35 @@ namespace ProyectoCore.Controllers
             }
 
             _context.Entry(comment).State = EntityState.Modified;
-            //add notification to the user that a comment was edited
-            Notification notification = new Notification
+            //search for task
+            var task = await _context.ProjectTasks.FindAsync(comment.TaskId);
+            //add notification for each user of the task
+            var userTasks = await _context.UserTasks.Where(u => u.TaskId == comment.TaskId).ToListAsync();
+            var notis = new List<Notification>();
+            foreach (var userTask in userTasks)
             {
-                Title = "Comment Edited",
-                Message = "A comment was edited",
-                Url = "http://localhost:3000/tareas/" + comment.TaskId,
-                UserId = comment.UserId,
-                Date = DateTime.Now
-            };
+                Notification notification = new Notification
+                {
+                    Title = "Comentario editado",
+                    Message = "Fue editado un comentario de la tarea: " + task.Name,
+                    Url = "http://localhost:3000/tareas/" + comment.TaskId,
+                    UserId = userTask.UserId,
+                    Date = DateTime.Now
+                };
+                
+                _context.Notifications.Add(notification);
+                notis.Add(notification);
+                
+            }
+
+
             try
             {
                 await _context.SaveChangesAsync();
+                foreach (var noti in notis)
+                {
+                    await _notificationHubContext.Clients.All.SendAsync("ReceiveNotification", noti);
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -103,19 +123,29 @@ namespace ProyectoCore.Controllers
                 return BadRequest("La tarea no existe");
             }
             comment.User = user;
-            //add notification to the user that a comment was added
-            Notification notification = new Notification
+
+            //add notification for each user of the task
+            var userTasks = await _context.UserTasks.Where(u => u.TaskId == comment.TaskId).ToListAsync();
+            var notis = new List<Notification>();
+            foreach (var userTask in userTasks)
             {
-                Title = "Comment Added",
-                Message = "A comment was added to a task you are assigned to",
-                Url = "http://localhost:3000/tareas/" + comment.TaskId,
-                UserId = user.Id,
-                Date = DateTime.Now
-            };
-            _context.Notifications.Add(notification);
+                Notification notification = new Notification
+                {
+                    Title = "Comentario añadido",
+                    Message = "Un comentario fue añadido a la tarea: " + task.Name,
+                    Url = "http://localhost:3000/tareas/" + comment.TaskId,
+                    UserId = userTask.UserId,
+                    Date = DateTime.Now
+                };
+                notis.Add(notification);
+                _context.Notifications.Add(notification);
+            }
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
-
+            foreach (var noti in notis)
+            {
+                await _notificationHubContext.Clients.All.SendAsync("ReceiveNotification", noti);
+            }
             return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
         }
 

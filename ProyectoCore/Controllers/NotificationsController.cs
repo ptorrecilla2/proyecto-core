@@ -75,6 +75,37 @@ namespace ProyectoCore.Controllers
             return NoContent();
         }
 
+        //batchUpdate
+        [HttpPut("batchUpdate")]
+        public async Task<IActionResult> PutNotifications(List<Notification> notifications)
+        {
+            foreach (var notification in notifications)
+            {
+                _context.Entry(notification).State = EntityState.Modified;
+            }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                foreach (var notification in notifications)
+                {
+                    if (!NotificationExists(notification.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return NoContent();
+        }   
+
+
         // POST: api/Notifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

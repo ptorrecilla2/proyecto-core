@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using ProyectoCore.Data;
 using ProyectoCore.Models;
+using ProyectoCore.NewFolder1;
 
 namespace ProyectoCore.Controllers
 {
@@ -15,10 +17,12 @@ namespace ProyectoCore.Controllers
     public class ProjectTasksController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
 
-        public ProjectTasksController(AppDbContext context)
+        public ProjectTasksController(AppDbContext context, IHubContext<NotificationHub> notificationHubContext)
         {
             _context = context;
+            _notificationHubContext = notificationHubContext;
         }
 
         // GET: api/ProjectTasks
@@ -43,7 +47,7 @@ namespace ProyectoCore.Controllers
             
             projectTask.Project = await _context.Projects.FindAsync(projectTask.ProjectId);
             //buscar  el dev y el manager a partir de la tabla UserTask
-            var participants = await _context.UserTasks.Where(u => u.TaskId == id).Include(u=>u.User).ToListAsync();
+            var participants = await _context.UserTasks.Where(u => u.TaskId == id).Include(u=>u.User).Include(u => u.User.Role).ToListAsync();
 
             
             return new ProjectTaskDTO{ ProjectTask=projectTask,Participants=participants};
@@ -52,7 +56,7 @@ namespace ProyectoCore.Controllers
         [HttpGet("{id}&{idProject}")]
         public async Task<ActionResult<IEnumerable<ProjectTask>>> GetProjectTask(int id,int idProject)
         {
-
+            
 
             var projectTask = await _context.ProjectTasks.Where(p=>p.ProjectId == idProject).ToListAsync() ;
 
@@ -78,22 +82,29 @@ namespace ProyectoCore.Controllers
             _context.Entry(projectTask).State = EntityState.Modified;
             //add notification saying a task was modified to both users using userTask table
             var userTasks = await _context.UserTasks.Where(u => u.TaskId == id).ToListAsync();
+            var notis = new List<Notification>();
             foreach (var userTask in userTasks)
             {
                 Notification notification = new Notification
                 {
-                    Title = "Task Modified",
-                    Message = "A task you are assigned to has been modified",
+                    Title = "Tarea Modificada",
+                    Message = "Fue modificada la tarea: "+ projectTask.Name,
                     Url = "http://localhost:3000/tareas/" + id,
                     UserId = userTask.UserId,
-
+                    Date=DateTime.Now
                 };
                 _context.Notifications.Add(notification);
+                notis.Add(notification);
+                
             }
 
             try
             {
                 await _context.SaveChangesAsync();
+                foreach (var noti in notis)
+                {
+                    await _notificationHubContext.Clients.All.SendAsync("ReceiveNotification", noti);
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -165,8 +176,8 @@ namespace ProyectoCore.Controllers
             //add notifications to the users that rediret to the task
             Notification notificationDev = new Notification
             {
-                Title = "New Task",
-                Message = "You have a new task",
+                Title = "Nueva tarea",
+                Message = "Te fue asignada la tarea "+ projectTask.Name,
                 Url = "http://localhost:3000/tareas/" + createdTaskId,
                 UserId = idDev,
                 Date = DateTime.Now
@@ -174,14 +185,16 @@ namespace ProyectoCore.Controllers
 
             Notification notificationManager = new Notification
             {
-                Title = "New Task",
-                Message = "You have a new task",
+                Title = "Nueva tarea",
+                Message = "Te fue asignada la tarea: " + projectTask.Name,
                 Url = "/task/" + createdTaskId,
                 UserId = idManager,
                 Date = DateTime.Now
             };
+            await _context.Notifications.AddRangeAsync(notificationDev, notificationManager);
             await _context.SaveChangesAsync();
-
+            await _notificationHubContext.Clients.All.SendAsync("ReceiveNotification", notificationDev);
+            await _notificationHubContext.Clients.All.SendAsync("ReceiveNotification", notificationManager);
             // Devolver la tarea creada con su ID
             return CreatedAtAction("GetProjectTask", new { id = createdTaskId }, projectTask);
         }
